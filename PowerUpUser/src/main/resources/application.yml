@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/Usuarios
+    platform: postgres
+    password: Pragma1999.jeisson2060
+  jpa:
+    generate-ddl: 'true'
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: create-drop

@@ -1,0 +1,37 @@
+package com.PowerUp.Square.infraestructure.out.jpa.adapter;
+
+import com.PowerUp.Square.domain.model.Restaurant;
+import com.PowerUp.Square.domain.spi.IRestaurantPersistencePort;
+import com.PowerUp.Square.infraestructure.out.jpa.mapper.IRestaurantMapper;
+import com.PowerUp.Square.infraestructure.out.jpa.repository.IRestaurantRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@Service
+public class RestaurantJpaAdapter implements IRestaurantPersistencePort {
+    private final IRestaurantRepository restaurantRepository;
+    private final IRestaurantMapper restaurantMapper;
+
+    @Override
+    public void saveRestaurant(Restaurant restaurant) {
+        restaurantRepository.save(restaurantMapper.toEntity(restaurant));
+    }
+
+    @Override
+    public List<Restaurant> getAllRestaurant() {
+        return null;
+    }
+
+    @Override
+    public Restaurant getRestaurant(Long id) {
+        return restaurantMapper.toRestaurant(restaurantRepository.findById(id));
+    }
+    @Override
+    public void updateRestaurant(Restaurant restaurant) {
+        restaurantRepository.save(restaurantMapper.toEntity(restaurant));
+    }
+
+}
