@@ -28,7 +28,7 @@ public class UserRestControler {
     })
     @PostMapping("/Propietario/")
     public ResponseEntity<Void> saveUserEntityOwner(@RequestBody UserRequest userRequest){
-        userHandler.saveUser(userRequest);
+        userHandler.saveUser(userRequest, 1L);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
