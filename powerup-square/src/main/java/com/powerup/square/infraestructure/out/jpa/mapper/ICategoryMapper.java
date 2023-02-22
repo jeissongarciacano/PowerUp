@@ -1,7 +1,7 @@
-package com.PowerUp.Square.infraestructure.out.jpa.mapper;
+package com.powerup.square.infraestructure.out.jpa.mapper;
 
-import com.PowerUp.Square.domain.model.Category;
-import com.PowerUp.Square.infraestructure.out.jpa.entity.CategoryEntity;
+import com.powerup.square.domain.model.Category;
+import com.powerup.square.infraestructure.out.jpa.entity.CategoryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

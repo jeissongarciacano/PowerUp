@@ -1,4 +1,4 @@
-package com.PowerUp.Square;
+package com.powerup.square;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

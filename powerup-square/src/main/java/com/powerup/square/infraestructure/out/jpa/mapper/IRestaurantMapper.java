@@ -1,7 +1,7 @@
-package com.PowerUp.Square.infraestructure.out.jpa.mapper;
+package com.powerup.square.infraestructure.out.jpa.mapper;
 
-import com.PowerUp.Square.domain.model.Restaurant;
-import com.PowerUp.Square.infraestructure.out.jpa.entity.RestaurantEntity;
+import com.powerup.square.domain.model.Restaurant;
+import com.powerup.square.infraestructure.out.jpa.entity.RestaurantEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

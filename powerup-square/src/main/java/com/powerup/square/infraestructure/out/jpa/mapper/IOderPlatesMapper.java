@@ -1,4 +1,4 @@
-package com.PowerUp.Square.infraestructure.out.jpa.mapper;
+package com.powerup.square.infraestructure.out.jpa.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

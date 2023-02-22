@@ -1,8 +1,8 @@
-package com.PowerUp.Square.domain.usecase;
+package com.powerup.square.domain.usecase;
 
-import com.PowerUp.Square.domain.api.IRestaurantServicePort;
-import com.PowerUp.Square.domain.spi.IRestaurantPersistencePort;
-import com.PowerUp.Square.domain.model.Restaurant;
+import com.powerup.square.domain.api.IRestaurantServicePort;
+import com.powerup.square.domain.spi.IRestaurantPersistencePort;
+import com.powerup.square.domain.model.Restaurant;
 
 import java.util.List;
 public class RestaurantUseCase implements IRestaurantServicePort {

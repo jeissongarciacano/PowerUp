@@ -1,6 +1,6 @@
-package com.PowerUp.Square.domain.api;
+package com.powerup.square.domain.api;
 
-import com.PowerUp.Square.domain.model.Restaurant;
+import com.powerup.square.domain.model.Restaurant;
 import java.util.List;
 
 

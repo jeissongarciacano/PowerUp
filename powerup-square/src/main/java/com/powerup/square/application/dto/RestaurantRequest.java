@@ -1,4 +1,4 @@
-package com.PowerUp.Square.application.dto;
+package com.powerup.square.application.dto;
 
 import lombok.Getter;
 import lombok.Setter;

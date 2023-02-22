@@ -1,4 +1,4 @@
-package com.PowerUp.Square.domain.model;
+package com.powerup.square.domain.model;
 
 public class Order {
     private Long id;

@@ -1,4 +1,4 @@
-package com.PowerUp.Square.infraestructure.out.jpa.entity;
+package com.powerup.square.infraestructure.out.jpa.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

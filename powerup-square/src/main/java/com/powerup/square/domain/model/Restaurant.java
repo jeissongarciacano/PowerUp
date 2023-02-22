@@ -1,4 +1,4 @@
-package com.PowerUp.Square.domain.model;
+package com.powerup.square.domain.model;
 
 public class Restaurant {
     private Long id;

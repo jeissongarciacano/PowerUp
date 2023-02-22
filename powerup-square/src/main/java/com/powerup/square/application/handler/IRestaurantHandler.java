@@ -1,7 +1,7 @@
-package com.PowerUp.Square.application.handler;
+package com.powerup.square.application.handler;
 
-import com.PowerUp.Square.application.dto.RestaurantResponse;
-import com.PowerUp.Square.application.dto.RestaurantRequest;
+import com.powerup.square.application.dto.RestaurantResponse;
+import com.powerup.square.application.dto.RestaurantRequest;
 
 public interface IRestaurantHandler {
     void saveRestaurant(RestaurantRequest restaurantRequest);

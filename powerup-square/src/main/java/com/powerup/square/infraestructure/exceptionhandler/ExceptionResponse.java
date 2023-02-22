@@ -1,4 +1,4 @@
-package com.PowerUp.Square.infraestructure.exceptionhandler;
+package com.powerup.square.infraestructure.exceptionhandler;
 
 public enum ExceptionResponse {
     NO_DATA_FOUND("No data found for the requested petition");

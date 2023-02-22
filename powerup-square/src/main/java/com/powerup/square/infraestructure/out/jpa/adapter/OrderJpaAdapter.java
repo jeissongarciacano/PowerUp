@@ -1,8 +1,8 @@
-package com.PowerUp.Square.infraestructure.out.jpa.adapter;
+package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.PowerUp.Square.infraestructure.out.jpa.entity.OrderEntity;
-import com.PowerUp.Square.infraestructure.out.jpa.mapper.IOrderMapper;
-import com.PowerUp.Square.infraestructure.out.jpa.repository.IOrderRepository;
+import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;
+import com.powerup.square.infraestructure.out.jpa.mapper.IOrderMapper;
+import com.powerup.square.infraestructure.out.jpa.repository.IOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

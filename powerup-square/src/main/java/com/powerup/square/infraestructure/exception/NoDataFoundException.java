@@ -1,4 +1,4 @@
-package com.PowerUp.Square.infraestructure.exception;
+package com.powerup.square.infraestructure.exception;
 
 public class NoDataFoundException extends RuntimeException {
     public NoDataFoundException() {

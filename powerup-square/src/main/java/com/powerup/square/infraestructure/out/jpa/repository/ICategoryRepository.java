@@ -1,6 +1,6 @@
-package com.PowerUp.Square.infraestructure.out.jpa.repository;
+package com.powerup.square.infraestructure.out.jpa.repository;
 
-import com.PowerUp.Square.infraestructure.out.jpa.entity.CategoryEntity;
+import com.powerup.square.infraestructure.out.jpa.entity.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

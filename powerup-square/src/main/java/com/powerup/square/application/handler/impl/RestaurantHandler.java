@@ -1,12 +1,12 @@
-package com.PowerUp.Square.application.handler.impl;
+package com.powerup.square.application.handler.impl;
 
-import com.PowerUp.Square.application.dto.RestaurantRequest;
-import com.PowerUp.Square.application.dto.RestaurantResponse;
-import com.PowerUp.Square.application.handler.IRestaurantHandler;
-import com.PowerUp.Square.application.mapper.IRestaurantRequestMapper;
-import com.PowerUp.Square.application.mapper.IRestaurantResponseMapper;
-import com.PowerUp.Square.domain.api.IRestaurantServicePort;
-import com.PowerUp.Square.domain.model.Restaurant;
+import com.powerup.square.application.dto.RestaurantRequest;
+import com.powerup.square.application.dto.RestaurantResponse;
+import com.powerup.square.application.handler.IRestaurantHandler;
+import com.powerup.square.application.mapper.IRestaurantRequestMapper;
+import com.powerup.square.application.mapper.IRestaurantResponseMapper;
+import com.powerup.square.domain.api.IRestaurantServicePort;
+import com.powerup.square.domain.model.Restaurant;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

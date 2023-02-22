@@ -1,6 +1,6 @@
-package com.PowerUp.Square.infraestructure.exceptionhandler;
+package com.powerup.square.infraestructure.exceptionhandler;
 
-import com.PowerUp.Square.infraestructure.exception.NoDataFoundException;
+import com.powerup.square.infraestructure.exception.NoDataFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

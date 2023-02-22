@@ -1,4 +1,4 @@
-package com.PowerUp.Square.infraestructure.out.jpa.adapter;
+package com.powerup.square.infraestructure.out.jpa.adapter;
 
 import com.PowerUp.Square.infraestructure.out.jpa.entity.EmployeeEntity;
 import com.PowerUp.Square.infraestructure.out.jpa.mapper.IEmployeeMapper;

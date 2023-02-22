@@ -1,9 +1,9 @@
-package com.PowerUp.Square.infraestructure.out.jpa.adapter;
+package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.PowerUp.Square.domain.model.Restaurant;
-import com.PowerUp.Square.domain.spi.IRestaurantPersistencePort;
-import com.PowerUp.Square.infraestructure.out.jpa.mapper.IRestaurantMapper;
-import com.PowerUp.Square.infraestructure.out.jpa.repository.IRestaurantRepository;
+import com.powerup.square.domain.model.Restaurant;
+import com.powerup.square.domain.spi.IRestaurantPersistencePort;
+import com.powerup.square.infraestructure.out.jpa.mapper.IRestaurantMapper;
+import com.powerup.square.infraestructure.out.jpa.repository.IRestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
