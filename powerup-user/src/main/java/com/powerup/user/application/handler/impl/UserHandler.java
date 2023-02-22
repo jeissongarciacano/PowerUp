@@ -31,6 +31,7 @@ public class UserHandler implements IUserHandler {
     @Override
     public void saveUser(UserRequest userRequest, Long idRol) {
         User user = iUserRequestMapper.toUser(userRequest);
+        user.setId(-1L);
         user.setIdRole(idRol);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         iUserServicePort.saveUser(user);

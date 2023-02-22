@@ -5,13 +5,10 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-
 @Getter
 @Setter
 public class UserRequest {
-    private Long id;
     @NotBlank
     private String name;
     @NotBlank
@@ -21,7 +18,7 @@ public class UserRequest {
     @NotBlank
     @Pattern(regexp = "^(\\+57)?'3'\\d{9}$")
     private String phone;
-    @NotEmpty
+    @NotBlank
     @Email
     private String email;
     @NotBlank

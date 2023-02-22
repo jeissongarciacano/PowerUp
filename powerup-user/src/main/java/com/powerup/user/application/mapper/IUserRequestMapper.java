@@ -13,7 +13,6 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IUserRequestMapper {
     @Mappings({
-            @Mapping(target="id", source="id"),
             @Mapping(target="name", source="name"),
             @Mapping(target="lastName", source="lastName"),
             @Mapping(target="idDocument", source="idDocument"),
