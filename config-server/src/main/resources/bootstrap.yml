@@ -6,13 +6,13 @@ spring:
     config:
       server:
         git:
-          uri:
-          username:
-          password:
+          uri: https://github.com/jeissongarciacano/PowerUp.git
+          username: "jeissongarciacano"
+          password: "bmx1999jeisson"
           default-label: main
           search-paths: config-data
 
   security:
     user:
       name: root
-      password: secret
+      password: s3cr3t
