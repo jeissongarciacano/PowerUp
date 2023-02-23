@@ -9,8 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class RestaurantRequest {
     @NotBlank
-    private Long id;
-    @NotBlank
     private String name;
     @NotBlank
     private String address;

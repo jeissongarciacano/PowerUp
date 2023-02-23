@@ -13,7 +13,6 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IRestaurantRequestMapper {
     @Mappings({
-            @Mapping(target="id", source="id"),
             @Mapping(target="name", source="name"),
             @Mapping(target="address", source="address"),
             @Mapping(target="phone", source="phone"),

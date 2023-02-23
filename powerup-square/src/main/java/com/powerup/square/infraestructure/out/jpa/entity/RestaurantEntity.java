@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -20,28 +21,29 @@ public class RestaurantEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
-    @NotBlank
+    @NotBlank(message = "El campo nombre es obligatorio")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])([a-zA-Z0-9]+)$", message = "no debe ser solo numerico")
     @Column(name = "name", nullable = false, length = 60)
     private String name;
-    @NotBlank
+    @NotBlank(message = "El campo direccion es obligatorio")
     @Column(name = "address", nullable = false, length = 60)
     private String address;
-    @NotBlank
     @Column(name = "id_owner", nullable = false, length = 60)
     private Long idOwner;
+    @NotBlank(message = "El campo celular es obligatorio")
+    @Pattern(regexp = "^[0-9]*$", message = "debe ser numerico")
     @NotBlank
     @Column(name = "phone", nullable = false, length = 60)
     private String phone;
-    @NotBlank
+    @NotBlank(message = "El campo url es obligatorio")
     @Column(name = "urlLogo", nullable = false, length = 60)
     private String urlLogo;
-    @NotBlank
+
+    @NotBlank(message = "El campo nit es obligatorio")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])([a-zA-Z0-9]+)$", message = "no debe ser solo numerico")
     @Column(name = "nit", nullable = false, length = 60)
     private String nit;
     @OneToMany(mappedBy = "restaurant")
     private List<PlateEntity> plates;
-    @OneToMany(mappedBy = "restaurant")
-    private List<OrderEntity> orders;
-
 
 }

@@ -7,7 +7,6 @@ import com.powerup.user.infraestructure.out.jpa.repository.IRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -23,10 +22,5 @@ public class RoleJpaAdapter {
     public RoleEntity toRoleEntity(Role role){
         return roleMapper.toEntity(role);
     }
-    public List<RoleEntity> getAllRole(){
-        return roleRepository.findAll();
-    }
-    public boolean existByID(Long id) {
-        return roleRepository.existsById(id);
-    }
+
 }

@@ -16,10 +16,8 @@ public interface IPlateMapper {
     @Mappings({
             @Mapping(target="id", source="id"),
             @Mapping(target="name", source="name"),
-            @Mapping(target="category", source="category"),
             @Mapping(target="description", source="description"),
             @Mapping(target="price", source="price"),
-            @Mapping(target="restaurant", source="Restaurant"),
             @Mapping(target="urlImage", source="urlImage")
     })
     PlateEntity toEntity(Plate plate);

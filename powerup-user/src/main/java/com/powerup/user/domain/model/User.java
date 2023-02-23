@@ -22,6 +22,9 @@ public class User {
         this.idDocument = idDocument;
     }
 
+    public User() {
+    }
+
     public Long getId() {
         return id;
     }

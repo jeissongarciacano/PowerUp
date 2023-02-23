@@ -23,9 +23,6 @@ public class PlateEntity {
     @NotBlank
     @Column(name = "name", nullable = false, length = 60)
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "id_Category", nullable = false)
-    private CategoryEntity category;
     @NotBlank
     @Column(name = "description", nullable = false)
     private String description;
@@ -38,7 +35,6 @@ public class PlateEntity {
     @NotBlank
     @Column(name = "urlImage", nullable = false, length = 60)
     private String urlImage;
-    @OneToMany(mappedBy = "plate")
-    private List<OrderPlatesEntity> orderPlatesEntities;
+
 
 }
