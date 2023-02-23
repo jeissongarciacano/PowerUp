@@ -8,3 +8,8 @@ spring:
       username: root
       password: s3cr3t
       profile: dev
+      
+  security:
+    user:
+      name: root
+      password: s3cr3t
