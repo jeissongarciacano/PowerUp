@@ -14,7 +14,6 @@ import java.util.Optional;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IRestaurantMapper {
     @Mappings({
-            @Mapping(target="id", source="id"),
             @Mapping(target="name", source="name"),
             @Mapping(target="address", source="address"),
             @Mapping(target="idOwner", source="idOwner"),

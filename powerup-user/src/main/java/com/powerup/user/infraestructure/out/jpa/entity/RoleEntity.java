@@ -20,10 +20,10 @@ public class RoleEntity {
     @Column(name = "id", nullable = false)
     private Long id;
     @NotBlank
-    @Column(name = "name", nullable = false, length = 60)
+    @Column(name = "name", nullable = false, length = 20)
     private String name;
     @NotBlank
-    @Column(name = "description", nullable = false, length = 60)
+    @Column(name = "description", nullable = false)
     private String description;
 
 }

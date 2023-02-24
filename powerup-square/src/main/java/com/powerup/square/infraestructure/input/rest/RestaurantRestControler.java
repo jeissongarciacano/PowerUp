@@ -29,7 +29,7 @@ public class RestaurantRestControler {
             @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
     })
     @PostMapping("/createRestaurant/")
-    public ResponseEntity<Void> saveRestaurantEntity(@RequestBody @Validated RestaurantRequest restaurantRequest){
+    public ResponseEntity<Void> saveRestaurantEntity(@Validated @RequestBody RestaurantRequest restaurantRequest){
         restaurantHandler.saveRestaurant(restaurantRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

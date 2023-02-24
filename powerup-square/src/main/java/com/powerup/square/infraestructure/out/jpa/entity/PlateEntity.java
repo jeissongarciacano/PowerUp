@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Entity
 @Table(name = "plate")
@@ -20,20 +18,16 @@ public class PlateEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
-    @NotBlank
-    @Column(name = "name", nullable = false, length = 60)
+    @Column(name = "name", nullable = false)
     private String name;
-    @NotBlank
     @Column(name = "description", nullable = false)
     private String description;
-    @NotBlank
     @Column(name = "price", nullable = false)
     private Long price;
     @ManyToOne
     @JoinColumn(name = "id_Restaurant", nullable = false)
     private RestaurantEntity restaurant;
-    @NotBlank
-    @Column(name = "urlImage", nullable = false, length = 60)
+    @Column(name = "urlImage", nullable = false)
     private String urlImage;
 
 

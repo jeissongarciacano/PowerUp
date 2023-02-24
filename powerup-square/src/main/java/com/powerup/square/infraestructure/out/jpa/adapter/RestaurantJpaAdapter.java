@@ -19,7 +19,6 @@ public class RestaurantJpaAdapter implements IRestaurantPersistencePort {
 
     @Override
     public void saveRestaurant(Restaurant restaurant) {
-        restaurant.setId(-1L);
         RestaurantEntity restaurantEntity = restaurantMapper.toEntity(restaurant);
         restaurantRepository.save(restaurantEntity);
     }

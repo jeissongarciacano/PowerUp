@@ -1,24 +1,29 @@
 package com.powerup.user.infraestructure.input.rest;
 
+import com.powerup.user.application.dto.RestauranteRequest;
 import com.powerup.user.application.dto.UserRequest;
 import com.powerup.user.application.dto.UserResponse;
 import com.powerup.user.application.handler.IUserHandler;
+import com.powerup.user.infraestructure.RestaurateClientFeign.RestauranteClient.RestauranteClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 
 public class UserRestControler {
     private final IUserHandler userHandler;
+    @Autowired
+    private RestauranteClient restauranteClient;
     @Operation(summary = "Add a new Owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
@@ -77,6 +82,14 @@ public class UserRestControler {
     @GetMapping("/GetUser/{name}/{lastName}")
     public UserResponse getUserByNameLastName(@PathVariable String name, @PathVariable String lastName){
         return null;
+    }
+    @PostMapping("/restaurante")
+    public  ResponseEntity<RestauranteRequest> saveRestaurante(@RequestBody RestauranteRequest restauranteRequest){
+        RestauranteRequest restaurante = restauranteClient.saveRestaurante(restauranteRequest).getBody();
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(restauranteRequest);
     }
 
 }

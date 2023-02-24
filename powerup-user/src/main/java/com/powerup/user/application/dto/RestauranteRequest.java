@@ -1,4 +1,4 @@
-package com.powerup.square.application.dto;
+package com.powerup.user.application.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,8 @@ import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
-public class RestaurantRequest {
+public class RestauranteRequest {
+
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z\\s]*$", message = "The field name shouldn't have numbers")
     private String name;
@@ -25,4 +26,5 @@ public class RestaurantRequest {
     @Pattern(regexp = "^[0-9]*$", message = "The NIT must be numeric")
     @NotBlank (message = "The field NIT is mandatory")
     private String nit;
+
 }
