@@ -10,12 +10,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("Restaurant")
+@RequestMapping("/restaurants")
 @RequiredArgsConstructor
 
 public class RestaurantRestControler {
@@ -27,8 +28,8 @@ public class RestaurantRestControler {
             @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
             @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
     })
-    @PostMapping
-    public ResponseEntity<Void> saveRestaurantEntity(@RequestBody RestaurantRequest restaurantRequest){
+    @PostMapping("/createRestaurant/")
+    public ResponseEntity<Void> saveRestaurantEntity(@RequestBody @Validated RestaurantRequest restaurantRequest){
         restaurantHandler.saveRestaurant(restaurantRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

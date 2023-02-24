@@ -1,8 +1,12 @@
 package com.powerup.square.infraestructure.configuration;
 
+import com.powerup.square.domain.api.IPlateServicePort;
 import com.powerup.square.domain.api.IRestaurantServicePort;
+import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
+import com.powerup.square.domain.usecase.PlateUseCase;
 import com.powerup.square.domain.usecase.RestaurantUseCase;
+import com.powerup.square.infraestructure.out.jpa.adapter.PlateJpaAdapter;
 import com.powerup.square.infraestructure.out.jpa.adapter.RestaurantJpaAdapter;
 import com.powerup.square.infraestructure.out.jpa.mapper.IPlateMapper;
 import com.powerup.square.infraestructure.out.jpa.mapper.IRestaurantMapper;
@@ -26,7 +30,16 @@ public class BeanConfiguration {
     }
     @Bean
     public IRestaurantServicePort restaurantServicePort(){
+
         return new RestaurantUseCase(restaurantPersistencePort());
     }
+
+    @Bean
+    public IPlatePersistencePort platePersistencePort(){
+        return new PlateJpaAdapter(plateRepository, plateMapper);
+    }
+
+    @Bean
+    public IPlateServicePort plateServicePort() { return new PlateUseCase(platePersistencePort());}
 
 }

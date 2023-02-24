@@ -1,6 +1,8 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
+import com.powerup.square.domain.model.Plate;
 import com.powerup.square.infraestructure.out.jpa.entity.PlateEntity;
+import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.infraestructure.out.jpa.mapper.IPlateMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IPlateRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,29 +12,30 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class PlateJpaAdapter {
+public class PlateJpaAdapter implements IPlatePersistencePort{
     private final IPlateRepository plateRepository;
     private final IPlateMapper plateMapper;
 
-    public PlateEntity savePlateEntity(PlateEntity PlateEntity){
-        return plateRepository.save(PlateEntity);
-    }
-    public List<PlateEntity> getAllPlate(){
-        return plateRepository.findAll();
-    }
-
-    public void deletePlate(Long id){
-        plateRepository.deleteById(id);
+    @Override
+    public void savePlate(Plate plate){
+        PlateEntity plateEntity = plateMapper.toEntity(plate);
+        plateRepository.save(plateEntity);
     }
 
-    public PlateEntity editPlate(PlateEntity plateEntity){
-        if(plateRepository.existsById(plateEntity.getId())){
-            return plateRepository.save(plateEntity);
-        }
+    @Override
+    public List<Plate> getAllPlates() {
+//        return plateRepository.findAll();
         return null;
     }
 
-    public boolean existByID(Long id) {
-        return plateRepository.existsById(id);
+    @Override
+    public Plate getPlate(Long id) {
+        return null;
     }
+
+    @Override
+    public void updatePlate(Plate plate) {
+
+    }
+
 }
