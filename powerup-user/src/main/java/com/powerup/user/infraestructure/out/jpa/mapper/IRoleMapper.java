@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper(componentModel = "spring",
@@ -20,5 +21,7 @@ public interface IRoleMapper {
             @Mapping(target="description", source="description")
     })
     RoleEntity toEntity(Role role);
-    Role toRole(Optional<RoleEntity> roleEntity);
+
+    Role toRole(RoleEntity roleEntity);
+    List<Role> toRoles(List<RoleEntity> roleEntity);
 }

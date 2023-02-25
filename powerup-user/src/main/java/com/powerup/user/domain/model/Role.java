@@ -9,8 +9,6 @@ public class Role {
         this.name = name;
         this.description = description;
     }
-    public Role(){
-    }
 
     public Long getId() {
         return id;

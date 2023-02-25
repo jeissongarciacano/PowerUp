@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 
@@ -20,26 +19,20 @@ public class UserEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
-    @NotBlank
     @Column(name = "name", nullable = false, length = 20)
     private String name;
-    @NotBlank
     @Column(name = "lastname", nullable = false, length = 20)
     private String lastName;
-    @NotBlank
     @Column(name = "phone", nullable = false, length = 13)
     private String phone;
-    @NotBlank
     @Column(name = "email", nullable = false)
     private String email;
-    @NotBlank
     @Column(name = "password", nullable = false)
     private String password;
     @JoinColumn(name = "id_role", nullable = false)
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch =
     FetchType.EAGER)
     private RoleEntity role;
-    @NotBlank
     @Column(name = "id_document", nullable = false)
     private String idDocument;
 }

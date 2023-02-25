@@ -1,5 +1,6 @@
 package com.powerup.user.application.dto;
 
+import com.powerup.user.domain.model.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,6 @@ public class UserResponse {
     private String lastName;
     private String phone;
     private String email;
-    private Long idRole;
+    private Role role;
     private String idDocument;
 }

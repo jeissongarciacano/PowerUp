@@ -7,6 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
@@ -16,8 +18,10 @@ public interface IUserResponseMapper {
             @Mapping(target="lastName", source="lastName"),
             @Mapping(target="phone", source="phone"),
             @Mapping(target="email", source="email"),
-            @Mapping(target="idRole", source="idRole")
+            @Mapping(target="role", source="role")
     })
     UserResponse toUserResponse(User user);
+    List<UserResponse> toUserResponse(List<User> user);
+
 
 }

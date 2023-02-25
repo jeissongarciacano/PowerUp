@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "role")
@@ -19,11 +18,8 @@ public class RoleEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
-    @NotBlank
     @Column(name = "name", nullable = false, length = 20)
     private String name;
-    @NotBlank
     @Column(name = "description", nullable = false)
     private String description;
-
 }

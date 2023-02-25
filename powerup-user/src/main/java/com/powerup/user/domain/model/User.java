@@ -7,22 +7,19 @@ public class User {
     private String phone;
     private String email;
     private String password;
-    private Long idRole;
+    private Role role;
     private String idDocument;
 
     public User(Long id, String name, String lastName, String phone, String email,
-                String password, Long idRole, String idDocument) {
+                String password, Role role, String idDocument) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
         this.password = password;
-        this.idRole = idRole;
+        this.role = role;
         this.idDocument = idDocument;
-    }
-
-    public User() {
     }
 
     public Long getId() {
@@ -49,8 +46,8 @@ public class User {
         return password;
     }
 
-    public Long getIdRole() {
-        return idRole;
+    public Role getRole() {
+        return role;
     }
 
     public String getIdDocument() {
@@ -81,8 +78,8 @@ public class User {
         this.password = password;
     }
 
-    public void setIdRole(Long idRole) {
-        this.idRole = idRole;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public void setIdDocument(String idDocument) {

@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper(componentModel = "spring",
@@ -24,4 +25,5 @@ public interface IUserMapper {
     })
     UserEntity toEntity(User user);
     User toUser(Optional<UserEntity> userEntity);
+    List<User> toUser(List<Optional<UserEntity>> userEntity);
 }
