@@ -38,10 +38,9 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public List<User> findClientByIdRole(Long idRol) {
-        return userPersistencePort.findClientByRol(idRol);
+    public List<User> findClientByIdRole(String roleName) {
+        return userPersistencePort.findClientByRol(roleName);
     }
-
     @Override
     public boolean existByID(Long id) {
         return userPersistencePort.existsByID(id);

@@ -47,8 +47,8 @@ public class UserHandler implements IUserHandler {
     }
 
     @Override
-    public List<UserResponse> findClientByRol(Long idRol) {
-        return iUserResponseMapper.toUserResponse(iUserServicePort.findClientByIdRole(idRol));
+    public List<UserResponse> findClientByRol(String roleName) {
+        return iUserResponseMapper.toUserResponse(iUserServicePort.findClientByIdRole(roleName));
     }
 
 }

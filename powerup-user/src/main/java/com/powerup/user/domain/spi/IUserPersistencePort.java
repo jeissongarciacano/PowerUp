@@ -10,6 +10,6 @@ public interface IUserPersistencePort {
     User getUser(Long id);
     User getUserByEmail(String email);
     boolean existsByEmail(String email);
-    List<User> findClientByRol(Long idRol);
+    List<User> findClientByRol(String roleName);
     boolean existsByID(Long id);
 }

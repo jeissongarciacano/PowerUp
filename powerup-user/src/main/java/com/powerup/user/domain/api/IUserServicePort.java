@@ -10,6 +10,6 @@ public interface IUserServicePort {
     User getUser(Long id);
     User getUserByEmail(String email);
     boolean existByEmail(String email);
-    List<User> findClientByIdRole(Long idRol);
+    List<User> findClientByIdRole(String roleName);
     boolean existByID(Long id);
 }

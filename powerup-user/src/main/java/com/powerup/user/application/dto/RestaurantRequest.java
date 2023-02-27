@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
-public class RestauranteRequest {
+public class RestaurantRequest {
 
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z\\s]*$", message = "The field name shouldn't have numbers")

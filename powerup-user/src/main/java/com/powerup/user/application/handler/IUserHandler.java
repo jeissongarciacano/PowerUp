@@ -10,5 +10,5 @@ public interface IUserHandler {
     void saveUser(UserRequest userRequest, Long idRol);
     UserResponse getUser(Long id);
     UserResponse getUserByEmail(String email);
-    List<UserResponse> findClientByRol(Long idRol);
+    List<UserResponse> findClientByRol(String roleName);
 }

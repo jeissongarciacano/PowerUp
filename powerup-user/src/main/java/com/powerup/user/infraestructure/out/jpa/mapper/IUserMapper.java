@@ -24,6 +24,6 @@ public interface IUserMapper {
             @Mapping(target="password", source="password")
     })
     UserEntity toEntity(User user);
-    User toUser(Optional<UserEntity> userEntity);
-    List<User> toUser(List<Optional<UserEntity>> userEntity);
+    User toUser(UserEntity userEntity);
+    List<User> toUser(List<UserEntity> userEntity);
 }

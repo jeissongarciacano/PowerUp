@@ -8,23 +8,13 @@ import com.powerup.user.infraestructure.out.jpa.entity.UserEntity;
 public class SaveUserDataTest {
 
     public static User obtainUser(){
-        User user = new User();
-        user.setName("Richard");
-        user.setLastName("Roe");
-        user.setPhone("3013218602");
-        user.setEmail("annie24@gmail.com");
-        user.setPassword("aa78");
-        user.setIdDocument("1017148689");
-
+        User user = new User(-1L,"Richard","Roe","3013218602","annie24@gmail.com",
+                "aa78",obtainRole(),"1017148689");
         return user;
     }
 
     public static Role obtainRole(){
-        Role role = new Role();
-        role.setId(1L);
-        role.setDescription("Administer all stuff");
-        role.setName("Admin");
-
+        Role role = new Role(0L,"Admin","Administer all stuff");
         return role;
 
     }

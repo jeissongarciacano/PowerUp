@@ -9,10 +9,12 @@ public class Routes {
     public static final String DEACTIVATE_USER_PATH = "/{identification}/deactivate";
     public static final String ACTIVATE_USER_PATH = "/{identification}/activate";
     public static final String LOGIN_PATH = "/login";
+    public static final String CREATE_USER = "/{idRole}";
 
     // External API routes
     public static final String UPDATE_IMAGE_PATH = "/{image_id}";
     public static final String GET_IMAGE_PATH = "/{image_id}";
+
 
     private Routes() {
         throw new IllegalStateException("Routes Class");

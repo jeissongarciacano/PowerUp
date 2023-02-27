@@ -1,29 +1,26 @@
 package com.powerup.user.infraestructure.input.rest;
 
-import com.powerup.user.application.dto.RestauranteRequest;
 import com.powerup.user.application.dto.UserRequest;
 import com.powerup.user.application.dto.UserResponse;
 import com.powerup.user.application.handler.IUserHandler;
-import com.powerup.user.infraestructure.RestaurateClientFeign.RestauranteClient.RestauranteClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
 
-public class UserRestControler {
+public class UserRestController {
     private final IUserHandler userHandler;
-    @Autowired
-    private RestauranteClient restauranteClient;
     @Operation(summary = "Add a new Owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
@@ -45,7 +42,7 @@ public class UserRestControler {
     })
     @PostMapping("/Employee/{idRole}")
     public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest, @PathVariable Long idRole){
-        if(idRole == 0){
+        if(idRole == 1){
                 userHandler.saveUser(userRequest, 2L);
                 return ResponseEntity.status(HttpStatus.CREATED).build();
         }
@@ -69,9 +66,11 @@ public class UserRestControler {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
     })
-    @GetMapping("/GetUser/{id}")
+    @GetMapping("/GET/UserById/{id}")
     public UserResponse getUserById(@PathVariable Long id){
-        return userHandler.getUser(id);
+        System.out.println(id);
+        UserResponse userResponse = userHandler.getUser(id);
+        return userResponse;
     }
 
     @Operation(summary = "get User by name and lastname")
@@ -79,17 +78,15 @@ public class UserRestControler {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
     })
-    @GetMapping("/GetUser/{name}/{lastName}")
-    public UserResponse getUserByNameLastName(@PathVariable String name, @PathVariable String lastName){
-        return null;
+    @GetMapping("/GET/UserByEmail/{email}")
+    public UserResponse getUserByEmail(@PathVariable String email){
+        System.out.println(email);
+        UserResponse userResponse = userHandler.getUserByEmail(email);
+        return userResponse;
     }
-    @PostMapping("/restaurante")
-    public  ResponseEntity<RestauranteRequest> saveRestaurante(@RequestBody RestauranteRequest restauranteRequest){
-        RestauranteRequest restaurante = restauranteClient.saveRestaurante(restauranteRequest).getBody();
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(restauranteRequest);
+    @GetMapping("/GET/UsersByRoleName/{name}")
+    public List<UserResponse> getAllUsers(@PathVariable String name){
+        return userHandler.findClientByRol(name);
     }
 
 }
