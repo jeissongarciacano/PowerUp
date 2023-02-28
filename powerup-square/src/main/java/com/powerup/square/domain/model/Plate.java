@@ -3,20 +3,22 @@ package com.powerup.square.domain.model;
 public class Plate {
     private Long id;
     private String name;
-    private int idCategory;
+    private Category category;
     private String description;
-    private int price;
-    private int idRestaurant;
+    private Long price;
+    private Long idRestaurant;
     private String urlImage;
+    private boolean active;
 
-    public Plate(Long id, String name, int idCategory, String description, int price, int idRestaurant, String urlImage) {
+    public Plate(Long id, String name, Category category, String description, Long price, Long idRestaurant, String urlImage, boolean active) {
         this.id = id;
         this.name = name;
-        this.idCategory = idCategory;
+        this.category = category;
         this.description = description;
         this.price = price;
         this.idRestaurant = idRestaurant;
         this.urlImage = urlImage;
+        this.active = active;
     }
 
     public Long getId() {
@@ -35,12 +37,12 @@ public class Plate {
         this.name = name;
     }
 
-    public int getIdCategory() {
-        return idCategory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getDescription() {
@@ -51,19 +53,19 @@ public class Plate {
         this.description = description;
     }
 
-    public int getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
-    public int getIdRestaurant() {
+    public Long getIdRestaurant() {
         return idRestaurant;
     }
 
-    public void setIdRestaurant(int idRestaurant) {
+    public void setIdRestaurant(Long idRestaurant) {
         this.idRestaurant = idRestaurant;
     }
 
@@ -73,5 +75,13 @@ public class Plate {
 
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

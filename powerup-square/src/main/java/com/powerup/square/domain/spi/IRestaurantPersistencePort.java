@@ -9,5 +9,4 @@ public interface IRestaurantPersistencePort {
     void saveRestaurant(Restaurant restaurant);
     List<Restaurant> getAllRestaurant();
     Restaurant getRestaurant(Long id);
-    void updateRestaurant(Restaurant restaurant);
 }

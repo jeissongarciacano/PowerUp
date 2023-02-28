@@ -15,7 +15,7 @@ public class RestaurantResponse {
 
     private String address;
 
-    private String idOwner;
+    private Long idOwner;
 
     private String phone;
 

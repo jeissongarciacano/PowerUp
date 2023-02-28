@@ -9,10 +9,10 @@ public class PlateResponse {
 
     private Long id;
     private String name;
-    private String idCategory;
-    private String description;
-    private String price;
-//    private String idRestaurant;
+    private Long idCategory;
+    private Long description;
+    private Long price;
+    private Long idRestaurant;
     private String urlImage;
 
 }

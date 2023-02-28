@@ -8,5 +8,4 @@ public interface IRestaurantServicePort {
     void saveRestaurant(Restaurant restaurant);
     List<Restaurant> getAllRestaurant();
     Restaurant getRestaurant(Long id);
-    void updateRestaurant(Restaurant restaurant);
 }

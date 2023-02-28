@@ -32,7 +32,5 @@ public class RestaurantEntity {
     private String urlLogo;
     @Column(name = "nit", nullable = false)
     private String nit;
-/*    @OneToMany(mappedBy = "restaurant")
-    private List<PlateEntity> plates;*/
 
 }

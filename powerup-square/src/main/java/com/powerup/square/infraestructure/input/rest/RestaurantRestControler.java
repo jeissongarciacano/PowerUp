@@ -1,6 +1,7 @@
 package com.powerup.square.infraestructure.input.rest;
 
 import com.powerup.square.application.dto.RestaurantRequest;
+import com.powerup.square.application.dto.RestaurantResponse;
 import com.powerup.square.application.handler.IRestaurantHandler;
 import com.powerup.square.infraestructure.out.jpa.entity.RestaurantEntity;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,6 +34,15 @@ public class RestaurantRestControler {
         restaurantHandler.saveRestaurant(restaurantRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    @Operation(summary = "Get restaurant")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
+    })
+    @GetMapping("/GET/{id}")
+    public RestaurantResponse getAllRestaurantById(@PathVariable Long id){
+        return restaurantHandler.getRestaurant(id);
+    }
     @Operation(summary = "Get restaurants")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
@@ -40,15 +50,6 @@ public class RestaurantRestControler {
     })
     @GetMapping
     public ResponseEntity<List<RestaurantEntity>> getAllRestaurant(){
-        return null;
-    }
-    @Operation(summary = "change restaurant")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
-    })
-    @PutMapping
-    public ResponseEntity<Void> editRestaurant(@RequestBody RestaurantEntity restaurantEntity){
         return null;
     }
 

@@ -30,12 +30,17 @@ public class PlateJpaAdapter implements IPlatePersistencePort{
 
     @Override
     public Plate getPlate(Long id) {
-        return null;
+        return plateMapper.toPlate(plateRepository.findById(id));
     }
 
     @Override
     public void updatePlate(Plate plate) {
+        plateRepository.save(plateMapper.toEntity(plate));
+    }
 
+    @Override
+    public void deletePlate(Long id) {
+        plateRepository.deleteById(id);
     }
 
 }

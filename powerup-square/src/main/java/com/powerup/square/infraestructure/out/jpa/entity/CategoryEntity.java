@@ -8,12 +8,12 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "plate")
+@Table(name = "category")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class PlateEntity {
+public class CategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -22,16 +22,4 @@ public class PlateEntity {
     private String name;
     @Column(name = "description", nullable = false)
     private String description;
-    @Column(name = "price", nullable = false)
-    private Long price;
-    @ManyToOne
-    @JoinColumn(name = "id_Restaurant", nullable = false)
-    private RestaurantEntity restaurant;
-    @ManyToOne
-    @JoinColumn(name = "id_category", nullable = false)
-    private CategoryEntity category;
-    @Column(name = "urlImage", nullable = false)
-    private String urlImage;
-
-
 }
