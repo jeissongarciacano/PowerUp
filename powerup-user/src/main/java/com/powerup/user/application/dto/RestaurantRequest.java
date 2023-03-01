@@ -2,6 +2,7 @@ package com.powerup.user.application.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -21,6 +22,7 @@ public class RestaurantRequest {
     private String phone;
 
     @NotBlank (message = "The url field is mandatory")
+    @URL(message = "must be a url")
     private String urlLogo;
 
     @Pattern(regexp = "^[0-9]*$", message = "The NIT must be numeric")

@@ -21,5 +21,5 @@ public interface IPlateMapper {
             @Mapping(target="urlImage", source="urlImage")
     })
     PlateEntity toEntity(Plate plate);
-    Plate toPlate(Optional<PlateEntity> plateEntity);
+    Plate toPlate(PlateEntity plateEntity);
 }

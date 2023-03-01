@@ -12,5 +12,5 @@ import java.util.Optional;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface ICategoryMapper {
     CategoryEntity toEntity(Category category);
-    Category toCategory(Optional<CategoryEntity> categoryEntity);
+    Category toCategory(CategoryEntity categoryEntity);
 }

@@ -8,4 +8,6 @@ public interface IRestaurantServicePort {
     void saveRestaurant(Restaurant restaurant);
     List<Restaurant> getAllRestaurant();
     Restaurant getRestaurant(Long id);
+    boolean existByName(String name);
+    boolean existById(Long id);
 }

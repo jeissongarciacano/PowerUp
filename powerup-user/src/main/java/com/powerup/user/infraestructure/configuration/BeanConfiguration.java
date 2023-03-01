@@ -1,6 +1,5 @@
 package com.powerup.user.infraestructure.configuration;
 
-import com.powerup.user.domain.api.IRoleServicePort;
 import com.powerup.user.domain.api.IUserServicePort;
 import com.powerup.user.domain.spi.IRolePersistencePort;
 import com.powerup.user.domain.spi.IUserPersistencePort;
@@ -42,4 +41,5 @@ public class BeanConfiguration {
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

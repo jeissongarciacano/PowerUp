@@ -18,8 +18,7 @@ public interface IPlateRequestMapper {
             @Mapping(target="name", source="name"),
             @Mapping(target="description", source="description"),
             @Mapping(target="price", source="price"),
-            @Mapping(target="idRestaurant", source="idRestaurant"),
-            @Mapping(target="urlImage", source="urlImage"),
+            @Mapping(target="urlImage", source="urlImage")
     })
     Plate toPlate(PlateRequest plateRequest);
 

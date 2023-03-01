@@ -1,5 +1,7 @@
 package com.powerup.square.application.dto;
 
+import com.powerup.square.domain.model.Category;
+import com.powerup.square.domain.model.Restaurant;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,10 +11,10 @@ public class PlateResponse {
 
     private Long id;
     private String name;
-    private Long idCategory;
-    private Long description;
+    private Category category;
+    private String description;
     private Long price;
-    private Long idRestaurant;
+    private Restaurant restaurant;
     private String urlImage;
 
 }

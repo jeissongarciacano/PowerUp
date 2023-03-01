@@ -1,6 +1,7 @@
 package com.powerup.user.domain.usecase;
 
 import com.powerup.user.domain.api.IUserServicePort;
+import com.powerup.user.domain.exception.NoDataFoundException;
 import com.powerup.user.domain.exception.UserAlreadyExistsException;
 import com.powerup.user.domain.model.User;
 import com.powerup.user.domain.spi.IRolePersistencePort;
@@ -24,6 +25,7 @@ public class UserUseCase implements IUserServicePort {
     }
     @Override
     public User getUser(Long id) {
+        if(!existByID(id)) throw new NoDataFoundException();
         return userPersistencePort.getUser(id);
     }
 

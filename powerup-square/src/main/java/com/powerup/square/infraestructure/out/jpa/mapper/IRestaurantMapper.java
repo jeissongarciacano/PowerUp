@@ -7,8 +7,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.Optional;
-
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
@@ -22,5 +20,5 @@ public interface IRestaurantMapper {
             @Mapping(target="nit", source="nit")
     })
     RestaurantEntity toEntity(Restaurant restaurant);
-    Restaurant toRestaurant(Optional<RestaurantEntity> restaurantEntity);
+    Restaurant toRestaurant(RestaurantEntity restaurantEntity);
 }

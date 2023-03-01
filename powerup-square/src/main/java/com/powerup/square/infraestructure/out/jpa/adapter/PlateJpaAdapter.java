@@ -30,7 +30,7 @@ public class PlateJpaAdapter implements IPlatePersistencePort{
 
     @Override
     public Plate getPlate(Long id) {
-        return plateMapper.toPlate(plateRepository.findById(id));
+        return plateMapper.toPlate(plateRepository.findById(id).get());
     }
 
     @Override
@@ -41,6 +41,16 @@ public class PlateJpaAdapter implements IPlatePersistencePort{
     @Override
     public void deletePlate(Long id) {
         plateRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean existById(Long id) {
+        return plateRepository.existsById(id);
+    }
+
+    @Override
+    public boolean existByName(String name) {
+        return plateRepository.existsByName(name);
     }
 
 }

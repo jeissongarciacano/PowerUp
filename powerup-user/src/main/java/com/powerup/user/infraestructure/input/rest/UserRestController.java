@@ -26,30 +26,22 @@ public class UserRestController {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
     })
-    @PostMapping("/Propietario/{idRole}")
-    public ResponseEntity<Void> saveUserEntityOwner(@Validated @RequestBody UserRequest userRequest, @PathVariable Long idRole){
-        if(idRole == 0) {
-            userHandler.saveUser(userRequest, 1L);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    @PostMapping("/Administrador/CreatePropietario")
+    public ResponseEntity<Void> saveUserEntityOwner(@Validated @RequestBody UserRequest userRequest){
+        userHandler.saveUser(userRequest, 1L);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
     @Operation(summary = "Add a new Employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
     })
-    @PostMapping("/Employee/{idRole}")
-    public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest, @PathVariable Long idRole){
-        if(idRole == 1){
-                userHandler.saveUser(userRequest, 2L);
-                return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    @PostMapping("/Propietario/CreateEmployee")
+    public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
+        userHandler.saveUser(userRequest, 2L);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
-
     @Operation(summary = "Add a new Client")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
@@ -73,7 +65,7 @@ public class UserRestController {
         return userResponse;
     }
 
-    @Operation(summary = "get User by name and lastname")
+    @Operation(summary = "get User by email")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
@@ -84,6 +76,11 @@ public class UserRestController {
         UserResponse userResponse = userHandler.getUserByEmail(email);
         return userResponse;
     }
+    @Operation(summary = "Get User by rol name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User created", content = @Content),
+            @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
+    })
     @GetMapping("/GET/UsersByRoleName/{name}")
     public List<UserResponse> getAllUsers(@PathVariable String name){
         return userHandler.findClientByRol(name);

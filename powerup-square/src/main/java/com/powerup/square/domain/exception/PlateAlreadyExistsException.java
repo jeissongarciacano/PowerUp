@@ -1,4 +1,4 @@
-package com.powerup.square.infraestructure.exception;
+package com.powerup.square.domain.exception;
 
 public class PlateAlreadyExistsException extends RuntimeException{
 

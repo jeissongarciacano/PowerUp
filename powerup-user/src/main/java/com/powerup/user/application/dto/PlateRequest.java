@@ -1,11 +1,10 @@
-package com.powerup.square.application.dto;
+package com.powerup.user.application.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter

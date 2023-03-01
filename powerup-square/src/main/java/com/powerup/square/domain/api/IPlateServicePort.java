@@ -11,5 +11,7 @@ public interface IPlateServicePort {
     Plate getPlate(Long id);
     void updatePlate(Plate plate);
     void deletePlate(Long id);
+    boolean existById(Long id);
+    boolean existByName(String name);
 
 }

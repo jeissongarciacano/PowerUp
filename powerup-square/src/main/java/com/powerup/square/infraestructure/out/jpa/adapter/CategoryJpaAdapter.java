@@ -28,7 +28,7 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
 
     @Override
     public Category getCategory(Long id) {
-        return null;
+        return categoryMapper.toCategory(categoryRepository.findById(id).get());
     }
 
     @Override

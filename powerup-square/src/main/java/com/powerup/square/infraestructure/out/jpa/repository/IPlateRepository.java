@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPlateRepository extends JpaRepository<PlateEntity, Long> {
+
+    boolean existsByName(String name);
 }
