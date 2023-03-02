@@ -41,7 +41,7 @@ public class PlateHandler implements IPlateHandler {
         plate.setActive(true);
         if(!iRestaurantPersistencePort.existByIdOwner(plateRequest.getIdRestaurant())) throw new NoDataFoundException();
         else{
-            plate.setRestaurant(iRestaurantPersistencePort.getRestaurant(plateRequest.getIdRestaurant()));
+            plate.setRestaurant(iRestaurantPersistencePort.getRestaurantByIdOwner(plateRequest.getIdRestaurant()));
             plate.setCategory(iCategoryPersistencePort.getCategory(plateRequest.getIdCategory()));
             plate.setId(-1L);
             iPlateServicePort.savePlate(plate);

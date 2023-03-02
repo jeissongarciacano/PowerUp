@@ -18,7 +18,8 @@ public interface IPlateMapper {
             @Mapping(target="name", source="name"),
             @Mapping(target="description", source="description"),
             @Mapping(target="price", source="price"),
-            @Mapping(target="urlImage", source="urlImage")
+            @Mapping(target="urlImage", source="urlImage"),
+            @Mapping(target="active", source="active")
     })
     PlateEntity toEntity(Plate plate);
     Plate toPlate(PlateEntity plateEntity);
