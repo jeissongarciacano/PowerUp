@@ -7,6 +7,7 @@ import com.powerup.square.application.handler.IPlateHandler;
 import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.IPlateServicePort;
+import com.powerup.square.domain.exception.NoDataFoundException;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.spi.ICategoryPersistencePort;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
@@ -38,10 +39,14 @@ public class PlateHandler implements IPlateHandler {
     public void savePlate(PlateRequest plateRequest) {
         Plate plate = iPlateRequestMapper.toPlate(plateRequest);
         plate.setActive(true);
-        plate.setRestaurant(iRestaurantPersistencePort.getRestaurant(plateRequest.getIdRestaurant()));
-        plate.setCategory(iCategoryPersistencePort.getCategory(plateRequest.getIdCategory()));
-        plate.setId(-1L);
-        iPlateServicePort.savePlate(plate);
+        if(!iRestaurantPersistencePort.existByIdOwner(plateRequest.getIdRestaurant())) throw new NoDataFoundException();
+        else{
+            plate.setRestaurant(iRestaurantPersistencePort.getRestaurant(plateRequest.getIdRestaurant()));
+            plate.setCategory(iCategoryPersistencePort.getCategory(plateRequest.getIdCategory()));
+            plate.setId(-1L);
+            iPlateServicePort.savePlate(plate);
+        }
+
 
     }
 
@@ -53,9 +58,13 @@ public class PlateHandler implements IPlateHandler {
 
     @Override
     public void updatePlate(PlateUpdatingRequest plateUpdatingRequest) {
-        Plate plate = iPlateServicePort.getPlate(plateUpdatingRequest.getId());
-        if(Strings.isNotBlank(plateUpdatingRequest.getDescription()) || Strings.isNotEmpty(plateUpdatingRequest.getDescription())) plate.setDescription(plateUpdatingRequest.getDescription());
-        if(plateUpdatingRequest.getPrice() > 0) plate.setPrice(plateUpdatingRequest.getPrice());
-        iPlateServicePort.updatePlate(plate);
+        if(!iRestaurantPersistencePort.existByIdOwner(plateUpdatingRequest.getIdOwner())) throw new NoDataFoundException();
+        else{
+            Plate plate = iPlateServicePort.getPlate(plateUpdatingRequest.getId());
+            if(Strings.isNotBlank(plateUpdatingRequest.getDescription()) || Strings.isNotEmpty(plateUpdatingRequest.getDescription())) plate.setDescription(plateUpdatingRequest.getDescription());
+            if(plateUpdatingRequest.getPrice() > 0) plate.setPrice(plateUpdatingRequest.getPrice());
+            iPlateServicePort.updatePlate(plate);
+        }
+
     }
 }

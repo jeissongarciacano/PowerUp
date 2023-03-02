@@ -12,5 +12,6 @@ public class PlateUpdatingRequest {
     @NotBlank
     private String description;
     private Long price;
+    private Long idOwner;
 
 }

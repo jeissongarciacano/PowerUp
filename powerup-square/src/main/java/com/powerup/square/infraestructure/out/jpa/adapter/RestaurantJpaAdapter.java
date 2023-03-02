@@ -34,6 +34,11 @@ public class RestaurantJpaAdapter implements IRestaurantPersistencePort {
     }
 
     @Override
+    public Restaurant getRestaurantByIdOwner(Long idOwner) {
+        return restaurantMapper.toRestaurant(restaurantRepository.findByIdOwner(idOwner));
+    }
+
+    @Override
     public boolean existByName(String name) {
         return restaurantRepository.existsByName(name);
     }
@@ -41,6 +46,11 @@ public class RestaurantJpaAdapter implements IRestaurantPersistencePort {
     @Override
     public boolean existById(Long id) {
         return restaurantRepository.existsById(id);
+    }
+
+    @Override
+    public boolean existByIdOwner(Long idOwner) {
+        return restaurantRepository.existsByIdOwner(idOwner);
     }
 
 }

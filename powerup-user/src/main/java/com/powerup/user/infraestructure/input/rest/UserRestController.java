@@ -3,6 +3,7 @@ package com.powerup.user.infraestructure.input.rest;
 import com.powerup.user.application.dto.UserRequest;
 import com.powerup.user.application.dto.UserResponse;
 import com.powerup.user.application.handler.IUserHandler;
+import com.powerup.user.infraestructure.configuration.RestauranteClient.RestaurantClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class UserRestController {
     private final IUserHandler userHandler;
+    private final RestaurantClient restaurantClient;
     @Operation(summary = "Add a new Owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
@@ -85,5 +87,6 @@ public class UserRestController {
     public List<UserResponse> getAllUsers(@PathVariable String name){
         return userHandler.findClientByRol(name);
     }
+
 
 }

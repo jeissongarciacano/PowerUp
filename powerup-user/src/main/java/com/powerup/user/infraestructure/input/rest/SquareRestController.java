@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,7 @@ public class SquareRestController {
     })
     @PostMapping("/admin/restaurant")
     public ResponseEntity<Void> saveRestaurant(@Validated @RequestBody RestaurantRequest restaurantRequest){
+
         if(userRepository.findById(restaurantRequest.getIdOwner()).get().getRole().getId() == 1) {
             restaurantClient.saveRestaurant(restaurantRequest);
             return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -41,6 +44,7 @@ public class SquareRestController {
     })
     @PostMapping("/owner/plate")
     public ResponseEntity<RestaurantRequest> savePlate(@Validated @RequestBody PlateRequest plateRequest){
+        plateRequest.setIdRestaurant(userRepository.findByEmail(userLoginApplication()).get().getId());
         restaurantClient.savePlate(plateRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -51,7 +55,17 @@ public class SquareRestController {
     })
     @PutMapping("/owner/putPlate")
     public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
+        plateUpdatingRequest.setIdOwner(userRepository.findByEmail(userLoginApplication()).get().getId());
         restaurantClient.editPlate(plateUpdatingRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    public static String userLoginApplication() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        return userDetails.getUsername();
     }
 }
