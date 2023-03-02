@@ -10,14 +10,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 
 public class UserRestController {
@@ -27,7 +26,7 @@ public class UserRestController {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
     })
-    @PostMapping("/Administrador/CreatePropietario")
+    @PostMapping("/administrador/CreatePropietario")
     public ResponseEntity<Void> saveUserEntityOwner(@Validated @RequestBody UserRequest userRequest){
         userHandler.saveUser(userRequest, 1L);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -37,7 +36,7 @@ public class UserRestController {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
     })
-    @PostMapping("/Propietario/CreateEmployee")
+    @PostMapping("/propietario/CreateEmployee")
     public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
         userHandler.saveUser(userRequest, 2L);
         return ResponseEntity.status(HttpStatus.CREATED).build();

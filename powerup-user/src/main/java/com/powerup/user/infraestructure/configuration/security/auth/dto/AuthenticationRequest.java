@@ -1,4 +1,4 @@
-package com.powerup.user.infraestructure.configuration.auth;
+package com.powerup.user.infraestructure.configuration.security.auth.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

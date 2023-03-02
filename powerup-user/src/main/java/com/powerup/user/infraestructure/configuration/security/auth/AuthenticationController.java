@@ -1,5 +1,7 @@
-package com.powerup.user.infraestructure.configuration.auth;
+package com.powerup.user.infraestructure.configuration.security.auth;
 
+import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationRequest;
+import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,5 +1,8 @@
-package com.powerup.user.infraestructure.configuration.auth;
+package com.powerup.user.infraestructure.configuration.security.auth;
 
+import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationRequest;
+import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationResponse;
+import com.powerup.user.infraestructure.configuration.security.auth.dto.UserAuthDto;
 import com.powerup.user.infraestructure.configuration.security.JwtService;
 import com.powerup.user.infraestructure.configuration.security.aut.DetailsUser;
 import com.powerup.user.infraestructure.configuration.security.aut.IUserDetailsMapper;
@@ -23,7 +26,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthenticationResponse  authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),

@@ -15,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/square")
+@RequestMapping("/api/v1/square")
 @RequiredArgsConstructor
 public class SquareRestController {
     private final RestaurantClient restaurantClient;
@@ -24,7 +24,7 @@ public class SquareRestController {
             @ApiResponse(responseCode = "201", description = "restaurant created", content = @Content),
             @ApiResponse(responseCode = "409", description = "restaurant already exists", content = @Content)
     })
-    @PostMapping("/Administrador/restaurant")
+    @PostMapping("/administrador/restaurant")
     public ResponseEntity<Void> saveRestaurant(@Validated @RequestBody RestaurantRequest restaurantRequest){
         restaurantClient.saveRestaurant(restaurantRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -34,7 +34,7 @@ public class SquareRestController {
             @ApiResponse(responseCode = "201", description = "plate created", content = @Content),
             @ApiResponse(responseCode = "409", description = "plate already exists", content = @Content)
     })
-    @PostMapping("/Propietario/plate")
+    @PostMapping("/propietario/plate")
     public ResponseEntity<RestaurantRequest> savePlate(@Validated @RequestBody PlateRequest plateRequest){
         restaurantClient.savePlate(plateRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -44,7 +44,7 @@ public class SquareRestController {
             @ApiResponse(responseCode = "201", description = "plate created", content = @Content),
             @ApiResponse(responseCode = "409", description = "plate already exists", content = @Content)
     })
-    @PutMapping("/Propietario/putPlate")
+    @PutMapping("/propietario/putPlate")
     public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
         restaurantClient.editPlate(plateUpdatingRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
