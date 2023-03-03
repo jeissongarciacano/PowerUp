@@ -26,7 +26,8 @@ public class UserRestController {
     @Operation(summary = "Add a new Owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/admin/createOwner")
     public ResponseEntity<Void> saveUserEntityOwner(@Validated @RequestBody UserRequest userRequest){
@@ -36,7 +37,8 @@ public class UserRestController {
     @Operation(summary = "Add a new Employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/owner/createEmployee")
     public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
@@ -47,7 +49,8 @@ public class UserRestController {
     @Operation(summary = "Add a new Client")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/client")
     public ResponseEntity<Void> saveUserEntityClient(@Validated @RequestBody UserRequest userRequest){
@@ -58,7 +61,8 @@ public class UserRestController {
     @Operation(summary = "get user by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @GetMapping("/GET/UserById/{id}")
     public UserResponse getUserById(@PathVariable Long id){
@@ -70,7 +74,8 @@ public class UserRestController {
     @Operation(summary = "get User by email")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @GetMapping("/GET/UserByEmail/{email}")
     public UserResponse getUserByEmail(@PathVariable String email){
@@ -81,7 +86,8 @@ public class UserRestController {
     @Operation(summary = "Get User by rol name")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @GetMapping("/GET/UsersByRoleName/{name}")
     public List<UserResponse> getAllUsers(@PathVariable String name){

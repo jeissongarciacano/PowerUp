@@ -7,9 +7,9 @@ import com.powerup.user.application.mapper.IUserRequestMapper;
 import com.powerup.user.application.mapper.IUserResponseMapper;
 import com.powerup.user.domain.api.IUserServicePort;
 import com.powerup.user.domain.model.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 

@@ -23,7 +23,6 @@ public class Security {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-//                .antMatchers("/**").permitAll()
                 .antMatchers("/api/v1/auth/**", "/swagger-ui/**", "/swagger-resources/**", "/api/v1/user/client/**", "/v3/api-docs/**", "/v2/api-docs/**").permitAll()
                 .antMatchers("/api/v1/user/admin/**", "/api/v1/square/admin/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/api/v1/user/owner/**", "/api/v1/square/owner/**").hasAuthority("ROLE_OWNER")

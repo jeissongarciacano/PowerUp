@@ -2,14 +2,12 @@ package com.powerup.user.infraestructure.out.jpa.adapter;
 
 import com.powerup.user.domain.model.Role;
 import com.powerup.user.domain.spi.IRolePersistencePort;
-import com.powerup.user.infraestructure.out.jpa.entity.RoleEntity;
 import com.powerup.user.infraestructure.out.jpa.mapper.IRoleMapper;
 import com.powerup.user.infraestructure.out.jpa.repository.IRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service

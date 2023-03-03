@@ -26,7 +26,8 @@ public class SquareRestController {
     @Operation(summary = "Create restaurant")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "restaurant already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "restaurant already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/admin/restaurant")
     public ResponseEntity<Void> saveRestaurant(@Validated @RequestBody RestaurantRequest restaurantRequest){
@@ -40,7 +41,8 @@ public class SquareRestController {
     @Operation(summary = "Create new plate")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "plate created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "plate already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "plate already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/owner/plate")
     public ResponseEntity<RestaurantRequest> savePlate(@Validated @RequestBody PlateRequest plateRequest){
@@ -51,7 +53,8 @@ public class SquareRestController {
     @Operation(summary = "Modify plate")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content)
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PutMapping("/owner/putPlate")
     public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){

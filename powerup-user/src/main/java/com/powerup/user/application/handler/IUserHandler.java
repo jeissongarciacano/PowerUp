@@ -2,7 +2,6 @@ package com.powerup.user.application.handler;
 
 import com.powerup.user.application.dto.UserRequest;
 import com.powerup.user.application.dto.UserResponse;
-import com.powerup.user.domain.model.User;
 
 import java.util.List;
 

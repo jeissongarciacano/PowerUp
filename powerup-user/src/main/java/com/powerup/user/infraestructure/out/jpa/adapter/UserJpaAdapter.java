@@ -1,9 +1,7 @@
 package com.powerup.user.infraestructure.out.jpa.adapter;
 
-import com.powerup.user.domain.model.Role;
 import com.powerup.user.domain.model.User;
 import com.powerup.user.domain.spi.IUserPersistencePort;
-import com.powerup.user.infraestructure.out.jpa.entity.RoleEntity;
 import com.powerup.user.infraestructure.out.jpa.entity.UserEntity;
 import com.powerup.user.infraestructure.out.jpa.mapper.IUserMapper;
 import com.powerup.user.infraestructure.out.jpa.repository.IUserRepository;
@@ -17,7 +15,6 @@ import java.util.List;
 public class UserJpaAdapter implements IUserPersistencePort {
     private final IUserRepository userRepository;
     private final IUserMapper userMapper;
-//    private final RoleJpaAdapter roleJpaAdapter;
     @Override
     public void saveUser(User user) {
         UserEntity userEntity = userMapper.toEntity(user);

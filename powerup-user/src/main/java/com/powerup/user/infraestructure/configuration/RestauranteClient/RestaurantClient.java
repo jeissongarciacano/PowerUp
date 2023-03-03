@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @FeignClient(name="plazoleta-service",url = "http://localhost:8080/" ) //configuration = CustomFeignConfig.class)
 public interface RestaurantClient {
-    //@PostMapping("/restaurante")
     @RequestMapping(method = RequestMethod.POST, value = "restaurants/createRestaurant")
     public ResponseEntity<Void> saveRestaurant(@RequestBody RestaurantRequest restaurantRequest);
     @RequestMapping(method = RequestMethod.POST, value = "plates/createPlate")
