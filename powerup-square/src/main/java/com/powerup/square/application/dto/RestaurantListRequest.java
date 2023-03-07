@@ -7,10 +7,9 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class RestaurantResponse {
-
-    private Long id;
-    private String name;
-    private String urlLogo;
-
+public class RestaurantListRequest {
+    private Long amount;
+    private Long page;
+    @NotBlank
+    private String sort;
 }

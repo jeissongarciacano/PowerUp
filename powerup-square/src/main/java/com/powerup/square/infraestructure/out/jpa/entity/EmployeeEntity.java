@@ -16,6 +16,8 @@ import javax.persistence.*;
 public class EmployeeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Column(name = "id", nullable = false)
+    private Long id;
     @Column(name = "idUser", nullable = false)
     private Long idUser;
     @ManyToOne

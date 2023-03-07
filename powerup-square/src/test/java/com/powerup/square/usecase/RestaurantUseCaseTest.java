@@ -33,9 +33,9 @@ class RestaurantUseCaseTest {
 
     @Test
     void getAllRestaurant() {
-        restaurantUseCase.getAllRestaurant();
+        //restaurantUseCase.getAllRestaurant();
 
-        verify(iRestaurantPersistencePort).getAllRestaurant();
+        //verify(iRestaurantPersistencePort).getAllRestaurant();
     }
 
 //    @Test

@@ -1,9 +1,7 @@
 package com.powerup.square.infraestructure.input.rest;
 
 
-import com.powerup.square.application.dto.PlateRequest;
-import com.powerup.square.application.dto.PlateResponse;
-import com.powerup.square.application.dto.PlateUpdatingRequest;
+import com.powerup.square.application.dto.*;
 import com.powerup.square.application.handler.IPlateHandler;
 import com.powerup.square.infraestructure.out.jpa.entity.PlateEntity;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,17 +42,6 @@ public class PlateRestController {
     public PlateResponse getAllPlateById(@PathVariable Long id){
         return plateHandler.getPlate(id);
     }
-
-    @Operation(summary = "Get plates")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Plate gotten", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content)
-    })
-    @GetMapping("/getPlates")
-    public ResponseEntity<List<PlateEntity>> getAllPlates(){
-
-        return null;
-    }
     @Operation(summary = "change plate")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Plate edited successfully", content = @Content)
@@ -63,6 +50,24 @@ public class PlateRestController {
     public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest){
         plateHandler.updatePlate(plateUpdatingRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @Operation(summary = "activate plate")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Plate edited successfully", content = @Content)
+    })
+    @PutMapping("/activatePlate")
+    public ResponseEntity<Void> activatePlate(@Validated @RequestBody ActivatePlateRequest activatePlateRequest){
+        plateHandler.activePlate(activatePlateRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @Operation(summary = "Get plates")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Plate gotten", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content)
+    })
+    @PostMapping("/getPlates")
+    public ResponseEntity<List<PlateResponse>> getAllPlates(@RequestBody PlateListRequest plateListRequest){
+        return ResponseEntity.status(HttpStatus.OK).body(plateHandler.getPlates(plateListRequest));
     }
 
 }

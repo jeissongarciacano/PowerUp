@@ -1,9 +1,9 @@
 package com.powerup.square.infraestructure.input.rest;
 
+import com.powerup.square.application.dto.RestaurantListRequest;
 import com.powerup.square.application.dto.RestaurantRequest;
 import com.powerup.square.application.dto.RestaurantResponse;
 import com.powerup.square.application.handler.IRestaurantHandler;
-import com.powerup.square.infraestructure.out.jpa.entity.RestaurantEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/restaurants")
 @RequiredArgsConstructor
-public class RestaurantRestControler {
+public class RestaurantRestController {
 
     private final IRestaurantHandler restaurantHandler;
 
@@ -47,9 +47,9 @@ public class RestaurantRestControler {
             @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
             @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
     })
-    @GetMapping
-    public ResponseEntity<List<RestaurantEntity>> getAllRestaurant(){
-        return null;
+    @PostMapping("/getAllRestaurant")
+    public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
+        return ResponseEntity.status(HttpStatus.OK).body(restaurantHandler.getRestaurants(restaurantListRequest));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.powerup.square.domain.usecase;
 
+import com.powerup.square.application.dto.RestaurantListRequest;
 import com.powerup.square.domain.api.IRestaurantServicePort;
 import com.powerup.square.domain.exception.NoDataFoundException;
 import com.powerup.square.domain.exception.RestaurantAlreadyExistsException;
@@ -18,8 +19,8 @@ public class RestaurantUseCase implements IRestaurantServicePort {
         restaurantPersistencePort.saveRestaurant(restaurant);
     }
     @Override
-    public List<Restaurant> getAllRestaurant() {
-        return restaurantPersistencePort.getAllRestaurant();
+    public List<Restaurant> getAllRestaurant(RestaurantListRequest restaurantListRequest) {
+        return restaurantPersistencePort.getAllRestaurant(restaurantListRequest);
     }
     @Override
     public Restaurant getRestaurant(Long id) {

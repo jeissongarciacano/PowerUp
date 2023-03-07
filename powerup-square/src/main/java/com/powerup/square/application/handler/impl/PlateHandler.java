@@ -1,8 +1,6 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.PlateRequest;
-import com.powerup.square.application.dto.PlateResponse;
-import com.powerup.square.application.dto.PlateUpdatingRequest;
+import com.powerup.square.application.dto.*;
 import com.powerup.square.application.handler.IPlateHandler;
 import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
@@ -15,6 +13,8 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -65,6 +65,24 @@ public class PlateHandler implements IPlateHandler {
             if(plateUpdatingRequest.getPrice() > 0) plate.setPrice(plateUpdatingRequest.getPrice());
             iPlateServicePort.updatePlate(plate);
         }
+    }
+    @Override
+    public void activePlate(ActivatePlateRequest activatePlateRequest){
+        if (!iRestaurantPersistencePort.existByIdOwner(activatePlateRequest.getIdOwner())) throw new NoDataFoundException();
+        else{
+            Plate plate = iPlateServicePort.getPlate(activatePlateRequest.getId());
+            plate.setActive(!plate.isActive());
+            iPlateServicePort.updatePlate(plate);
+        }
+    }
 
+    @Override
+    public List<PlateResponse> getPlates(PlateListRequest plateListRequest) {
+        List<Plate> plates = iPlateServicePort.getAllPlates(plateListRequest);
+        List<PlateResponse> plateResponses = new ArrayList<>();
+        for (int i = 0; i < plates.size(); i++) {
+            plateResponses.add(iPlateResponseMapper.toPlateResponse(plates.get(i)));
+        }
+        return plateResponses;
     }
 }

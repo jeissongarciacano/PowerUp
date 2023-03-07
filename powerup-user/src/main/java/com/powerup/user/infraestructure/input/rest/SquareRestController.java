@@ -1,8 +1,6 @@
 package com.powerup.user.infraestructure.input.rest;
 
-import com.powerup.user.application.dto.PlateRequest;
-import com.powerup.user.application.dto.PlateUpdatingRequest;
-import com.powerup.user.application.dto.RestaurantRequest;
+import com.powerup.user.application.dto.*;
 import com.powerup.user.infraestructure.configuration.RestauranteClient.RestaurantClient;
 import com.powerup.user.infraestructure.out.jpa.repository.IUserRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/square")
@@ -60,6 +60,103 @@ public class SquareRestController {
     public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
         plateUpdatingRequest.setIdOwner(userRepository.findByEmail(userLoginApplication()).get().getId());
         restaurantClient.editPlate(plateUpdatingRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @Operation(summary = "Activate or Disable Plate")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @PutMapping("/owner/activatePlate")
+    public ResponseEntity<Void> activatePlate(@RequestBody ActivatePlateRequest activatePlateRequest){
+        activatePlateRequest.setIdOwner(userRepository.findByEmail(userLoginApplication()).get().getId());
+        restaurantClient.activatePlate(activatePlateRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @Operation(summary = "get All Restaurant")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @PostMapping("/client/getAllRestaurant")
+    public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
+        return restaurantClient.getAllRestaurant(restaurantListRequest);
+    }
+    @Operation(summary = "get Plates of Restaurant")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @PostMapping("/client/getRestaurantPlates")
+    public ResponseEntity<List<RestaurantResponse>> getRestaurantPlates(@RequestBody PlateListRequest plateListRequest){
+        return restaurantClient.getRestaurantPlates(plateListRequest);
+    }
+    @Operation(summary = "make Order")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @PostMapping("/client/makeOrder")
+    public ResponseEntity<Void> makeOrder(@Validated @RequestBody OrderRequest orderRequest){
+        restaurantClient.makeOrder(orderRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @Operation(summary = "get All Order By State")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @GetMapping("/employee/getAllOrderByState/{state}")
+    public ResponseEntity<List<OrderResponse>> getAllOrderByState(@PathVariable String state){
+        return restaurantClient.getAllOrderByState(state,userRepository.findByEmail(userLoginApplication()).get().getId());
+    }
+    @Operation(summary = "take Order")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @PutMapping("/employee/takeOrder/{id}")
+    public ResponseEntity<Void> takeOrder(@PathVariable Long id){
+        restaurantClient.takeOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @Operation(summary = "Change Order to ready to deliver")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @PutMapping("/employee/readyToDeliver/{id}")
+    public ResponseEntity<Void> readyToDeliver(@PathVariable Long id){
+        restaurantClient.readyToDeliver(id,userRepository.findByEmail(userLoginApplication()).get().getId());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @Operation(summary = "Change Order to ready to deliver")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @PutMapping("/employee/deliverOrder/{id}")
+    public ResponseEntity<Void> deliverOrder(@PathVariable Long id){
+        restaurantClient.deliverOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+    @Operation(summary = "cancel Order")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+    })
+    @PutMapping("/client/cancelOrder/{id}")
+    public ResponseEntity<Void> cancelOrder(@PathVariable Long id){
+        restaurantClient.cancelOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

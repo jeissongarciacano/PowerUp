@@ -13,15 +13,6 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IPlateResponseMapper {
-    @Mappings({
-            @Mapping(target="id", source="id"),
-            @Mapping(target="name", source="name"),
-            @Mapping(target="category", source="category"),
-            @Mapping(target="description", source="description"),
-            @Mapping(target="price", source="price"),
-            @Mapping(target="restaurant", source="restaurant"),
-            @Mapping(target="urlImage", source="urlImage")
-    })
     PlateResponse toPlateResponse(Plate plate);
 
 }
