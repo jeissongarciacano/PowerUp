@@ -6,9 +6,10 @@ import java.util.List;
 
 public interface IOrderPersistencePort {
 
-    void saveOrder(Order order);
+    Order saveOrder(Order order);
     List<Order> getAllOrder();
     Order getOrder(Long id);
     void cancelOrder(Long id);
     void updateOrder(Order order);
+    Order getOrderByClientId(Long idClient);
 }

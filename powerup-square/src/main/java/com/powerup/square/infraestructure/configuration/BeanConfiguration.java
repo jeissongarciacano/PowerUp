@@ -1,25 +1,11 @@
 package com.powerup.square.infraestructure.configuration;
 
-import com.powerup.square.domain.api.IEmployeeServicePort;
-import com.powerup.square.domain.api.IPlateServicePort;
-import com.powerup.square.domain.api.IRestaurantServicePort;
-import com.powerup.square.domain.spi.IEmployeePersistencePort;
-import com.powerup.square.domain.spi.IPlatePersistencePort;
-import com.powerup.square.domain.spi.IRestaurantPersistencePort;
-import com.powerup.square.domain.usecase.EmployeeUseCase;
-import com.powerup.square.domain.usecase.PlateUseCase;
-import com.powerup.square.domain.usecase.RestaurantUseCase;
-import com.powerup.square.infraestructure.out.jpa.adapter.EmployeeJpaAdapter;
-import com.powerup.square.infraestructure.out.jpa.adapter.PlateJpaAdapter;
-import com.powerup.square.infraestructure.out.jpa.adapter.RestaurantJpaAdapter;
-import com.powerup.square.infraestructure.out.jpa.mapper.ICategoryMapper;
-import com.powerup.square.infraestructure.out.jpa.mapper.IEmployeeMapper;
-import com.powerup.square.infraestructure.out.jpa.mapper.IPlateMapper;
-import com.powerup.square.infraestructure.out.jpa.mapper.IRestaurantMapper;
-import com.powerup.square.infraestructure.out.jpa.repository.ICategoryRepository;
-import com.powerup.square.infraestructure.out.jpa.repository.IEmployeeRepository;
-import com.powerup.square.infraestructure.out.jpa.repository.IPlateRepository;
-import com.powerup.square.infraestructure.out.jpa.repository.IRestaurantRepository;
+import com.powerup.square.domain.api.*;
+import com.powerup.square.domain.spi.*;
+import com.powerup.square.domain.usecase.*;
+import com.powerup.square.infraestructure.out.jpa.adapter.*;
+import com.powerup.square.infraestructure.out.jpa.mapper.*;
+import com.powerup.square.infraestructure.out.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +22,10 @@ public class BeanConfiguration {
     private final ICategoryRepository categoryRepository;
     private final IEmployeeRepository employeeRepository;
     private final IEmployeeMapper employeeMapper;
+    private final IOrderMapper orderMapper;
+    private final IOrderRepository orderRepository;
+    private final IOrderPlatesMapper orderPlatesMapper;
+    private final IOrderPlatesRepository orderPlatesRepository;
 
     @Bean
     @Primary
@@ -63,7 +53,22 @@ public class BeanConfiguration {
     public IEmployeeServicePort employeeServicePort(){
         return new EmployeeUseCase(employeePersistencePort());
     }
-
+    @Bean
+    public IOrderPlatesPersistencePort orderPlatesPersistencePort(){
+        return new OrderPlatesJpaAdapter(orderPlatesRepository, orderPlatesMapper, orderMapper);
+    }
+    @Bean
+    public IOrderPlatesServicePort orderPlatesServicePort(){
+        return new OrderPlatesUseCase(orderPlatesPersistencePort());
+    }
+    @Bean
+    public IOrderPersistencePort orderPersistencePort(){
+        return new OrderJpaAdapter(orderRepository, orderMapper,employeeRepository, restaurantRepository);
+    }
+    @Bean
+    public IOrderServicePort orderServicePort(){
+        return new OrderUseCase(orderPersistencePort());
+    }
 
 
 }

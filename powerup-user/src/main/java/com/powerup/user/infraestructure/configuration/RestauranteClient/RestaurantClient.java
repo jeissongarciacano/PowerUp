@@ -28,15 +28,15 @@ public interface RestaurantClient {
     public ResponseEntity<List<RestaurantResponse>> getRestaurantPlates(@RequestBody PlateListRequest plateListRequest);
     @RequestMapping(method = RequestMethod.POST, value = "order/makeOrder")
     public ResponseEntity<Void> makeOrder(@RequestBody OrderRequest orderRequest);
-    @RequestMapping(method = RequestMethod.GET, value = "order/activatePlate/{state}/{id}")
+    @RequestMapping(method = RequestMethod.POST, value = "order/getAllOrderByState")
     public ResponseEntity<List<OrderResponse>> getAllOrderByState(@PathVariable String state, @PathVariable Long id);
-    @RequestMapping(method = RequestMethod.PUT, value = "order/activatePlate/{id}/{idEmployee}")
+    @RequestMapping(method = RequestMethod.PUT, value = "order/takeOrder")
     public ResponseEntity<Void> takeOrder(@PathVariable Long id, @PathVariable Long idEmployee);
-    @RequestMapping(method = RequestMethod.PUT, value = "order/activatePlate/{id}/{idEmployee}")
+    @RequestMapping(method = RequestMethod.PUT, value = "order/orderReadyDeliver")
     public ResponseEntity<Void> readyToDeliver(@PathVariable Long id, @PathVariable Long idEmployee);
-    @RequestMapping(method = RequestMethod.PUT, value = "order/activatePlate/{id}/{idEmployee}")
+    @RequestMapping(method = RequestMethod.PUT, value = "order/orderDeliver")
     public ResponseEntity<Void> deliverOrder(@PathVariable Long id, @PathVariable Long idEmployee);
-    @RequestMapping(method = RequestMethod.PUT, value = "client/activatePlate/{id}/{idClient}")
+    @RequestMapping(method = RequestMethod.PUT, value = "order/cancelOrder")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long id, @PathVariable Long idClient);
 
 }

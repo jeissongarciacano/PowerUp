@@ -4,7 +4,6 @@ import com.powerup.user.application.dto.EmployeeRequest;
 import com.powerup.user.application.dto.UserRequest;
 import com.powerup.user.application.dto.UserResponse;
 import com.powerup.user.application.handler.IUserHandler;
-import com.powerup.user.application.handler.impl.UserHandler;
 import com.powerup.user.infraestructure.configuration.RestauranteClient.RestaurantClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,8 +17,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
@@ -31,7 +28,8 @@ public class UserRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/admin/createOwner")
     public ResponseEntity<Void> saveUserEntityOwner(@Validated @RequestBody UserRequest userRequest){
@@ -42,7 +40,8 @@ public class UserRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/owner/createEmployee")
     public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
@@ -70,9 +69,11 @@ public class UserRestController {
 
     @Operation(summary = "get user by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "302", description = "User found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "User don't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
+
     })
     @GetMapping("/GET/UserById/{id}")
     public UserResponse getUserById(@PathVariable Long id){
@@ -83,9 +84,10 @@ public class UserRestController {
 
     @Operation(summary = "get User by email")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "302", description = "User found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "User don't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @GetMapping("/GET/UserByEmail/{email}")
     public UserResponse getUserByEmail(@PathVariable String email){

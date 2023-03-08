@@ -20,36 +20,28 @@ import java.util.List;
 @RequestMapping("/restaurants")
 @RequiredArgsConstructor
 public class RestaurantRestController {
-
     private final IRestaurantHandler restaurantHandler;
 
     @Operation(summary = "Add a new restaurant")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/createRestaurant")
     public ResponseEntity<Void> saveRestaurantEntity(@Validated @RequestBody RestaurantRequest restaurantRequest){
         restaurantHandler.saveRestaurant(restaurantRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    @Operation(summary = "Get restaurant")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
-    })
-    @GetMapping("/GET/{id}")
-    public RestaurantResponse getAllRestaurantById(@PathVariable Long id){
-        return restaurantHandler.getRestaurant(id);
-    }
     @Operation(summary = "Get restaurants")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
+            @ApiResponse(responseCode = "302", description = "Restaurants found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Restaurants don't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/getAllRestaurant")
     public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
-        return ResponseEntity.status(HttpStatus.OK).body(restaurantHandler.getRestaurants(restaurantListRequest));
+        return ResponseEntity.status(HttpStatus.FOUND).body(restaurantHandler.getRestaurants(restaurantListRequest));
     }
 
 }

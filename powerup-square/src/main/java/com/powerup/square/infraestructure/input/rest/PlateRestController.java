@@ -26,7 +26,8 @@ public class PlateRestController {
     @Operation(summary = "Add a new plate")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Plate created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Plate already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "Plate already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/createPlate")
     public ResponseEntity<Void> savePlateEntity(@Validated @RequestBody  PlateRequest plateRequest){
@@ -44,7 +45,9 @@ public class PlateRestController {
     }
     @Operation(summary = "change plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Plate edited successfully", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Plate modified", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PutMapping("/putPlate")
     public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest){
@@ -53,7 +56,9 @@ public class PlateRestController {
     }
     @Operation(summary = "activate plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Plate edited successfully", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Plate disable or active", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PutMapping("/activatePlate")
     public ResponseEntity<Void> activatePlate(@Validated @RequestBody ActivatePlateRequest activatePlateRequest){
@@ -62,12 +67,13 @@ public class PlateRestController {
     }
     @Operation(summary = "Get plates")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Plate gotten", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content)
+            @ApiResponse(responseCode = "302", description = "Plates found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Plates don't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/getPlates")
     public ResponseEntity<List<PlateResponse>> getAllPlates(@RequestBody PlateListRequest plateListRequest){
-        return ResponseEntity.status(HttpStatus.OK).body(plateHandler.getPlates(plateListRequest));
+        return ResponseEntity.status(HttpStatus.FOUND).body(plateHandler.getPlates(plateListRequest));
     }
 
 }

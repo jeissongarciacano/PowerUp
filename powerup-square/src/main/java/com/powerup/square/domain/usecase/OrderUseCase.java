@@ -14,8 +14,8 @@ public class OrderUseCase implements IOrderServicePort {
     }
 
     @Override
-    public void saveOrder(Order order) {
-        orderPersistencePort.saveOrder(order);
+    public Order saveOrder(Order order) {
+        return orderPersistencePort.saveOrder(order);
     }
 
     @Override
@@ -36,6 +36,11 @@ public class OrderUseCase implements IOrderServicePort {
     @Override
     public void updateOrder(Order order) {
         orderPersistencePort.updateOrder(order);
+    }
+
+    @Override
+    public Order getOrderByClientId(Long idClient) {
+        return orderPersistencePort.getOrderByClientId(idClient);
     }
 }
 

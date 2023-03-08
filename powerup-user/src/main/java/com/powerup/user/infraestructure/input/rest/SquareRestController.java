@@ -25,60 +25,60 @@ public class SquareRestController {
     private final IUserRepository userRepository;
     @Operation(summary = "Create restaurant")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "restaurant already exists", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/admin/restaurant")
     public ResponseEntity<Void> saveRestaurant(@Validated @RequestBody RestaurantRequest restaurantRequest){
 
-        if(userRepository.findById(restaurantRequest.getIdOwner()).get().getRole().getId() == 1) {
-            restaurantClient.saveRestaurant(restaurantRequest);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
+        if(userRepository.findById(restaurantRequest.getIdOwner()).get().getRole().getId() == 1)
+            return restaurantClient.saveRestaurant(restaurantRequest);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     @Operation(summary = "Create new plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "plate created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "plate already exists", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "201", description = "Plate created", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Plate already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/owner/plate")
-    public ResponseEntity<RestaurantRequest> savePlate(@Validated @RequestBody PlateRequest plateRequest){
+    public ResponseEntity<Void> savePlate(@Validated @RequestBody PlateRequest plateRequest){
         plateRequest.setIdRestaurant(userRepository.findByEmail(userLoginApplication()).get().getId());
-        restaurantClient.savePlate(plateRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return restaurantClient.savePlate(plateRequest);
     }
     @Operation(summary = "Modify plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Plate modified", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PutMapping("/owner/putPlate")
     public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
         plateUpdatingRequest.setIdOwner(userRepository.findByEmail(userLoginApplication()).get().getId());
-        restaurantClient.editPlate(plateUpdatingRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return restaurantClient.editPlate(plateUpdatingRequest);
     }
     @Operation(summary = "Activate or Disable Plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Plate disable or active", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PutMapping("/owner/activatePlate")
     public ResponseEntity<Void> activatePlate(@RequestBody ActivatePlateRequest activatePlateRequest){
         activatePlateRequest.setIdOwner(userRepository.findByEmail(userLoginApplication()).get().getId());
-        restaurantClient.activatePlate(activatePlateRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return restaurantClient.activatePlate(activatePlateRequest);
     }
     @Operation(summary = "get All Restaurant")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "302", description = "Restaurants found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Restaurants don't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/client/getAllRestaurant")
     public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
@@ -86,9 +86,10 @@ public class SquareRestController {
     }
     @Operation(summary = "get Plates of Restaurant")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "302", description = "Plates found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Plates don't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/client/getRestaurantPlates")
     public ResponseEntity<List<RestaurantResponse>> getRestaurantPlates(@RequestBody PlateListRequest plateListRequest){
@@ -96,20 +97,21 @@ public class SquareRestController {
     }
     @Operation(summary = "make Order")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "201", description = "Order created", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Order already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/client/makeOrder")
     public ResponseEntity<Void> makeOrder(@Validated @RequestBody OrderRequest orderRequest){
-        restaurantClient.makeOrder(orderRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return restaurantClient.makeOrder(orderRequest);
     }
     @Operation(summary = "get All Order By State")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "302", description = "Orders found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Orders don't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @GetMapping("/employee/getAllOrderByState/{state}")
     public ResponseEntity<List<OrderResponse>> getAllOrderByState(@PathVariable String state){
@@ -117,47 +119,47 @@ public class SquareRestController {
     }
     @Operation(summary = "take Order")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Order taken", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Order doesn't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PutMapping("/employee/takeOrder/{id}")
     public ResponseEntity<Void> takeOrder(@PathVariable Long id){
-        restaurantClient.takeOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return restaurantClient.takeOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
     }
     @Operation(summary = "Change Order to ready to deliver")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Order ready to deliver", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Order doesn't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PutMapping("/employee/readyToDeliver/{id}")
     public ResponseEntity<Void> readyToDeliver(@PathVariable Long id){
-        restaurantClient.readyToDeliver(id,userRepository.findByEmail(userLoginApplication()).get().getId());
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return restaurantClient.readyToDeliver(id,userRepository.findByEmail(userLoginApplication()).get().getId());
     }
-    @Operation(summary = "Change Order to ready to deliver")
+    @Operation(summary = "Change Order deliver")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Order deliver", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Order doesn't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PutMapping("/employee/deliverOrder/{id}")
     public ResponseEntity<Void> deliverOrder(@PathVariable Long id){
-        restaurantClient.deliverOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return restaurantClient.deliverOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
     }
     @Operation(summary = "cancel Order")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "plate modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "plate doesn't modify", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Order cancel", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Order doesn't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PutMapping("/client/cancelOrder/{id}")
     public ResponseEntity<Void> cancelOrder(@PathVariable Long id){
-        restaurantClient.cancelOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return restaurantClient.cancelOrder(id,userRepository.findByEmail(userLoginApplication()).get().getId() );
     }
 
     public static String userLoginApplication() {

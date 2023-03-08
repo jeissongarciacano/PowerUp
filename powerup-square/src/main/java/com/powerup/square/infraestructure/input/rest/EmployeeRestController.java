@@ -23,7 +23,8 @@ public class EmployeeRestController {
     @Operation(summary = "Add a new employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "employee created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "employee already exists", content = @Content)
+            @ApiResponse(responseCode = "409", description = "employee already exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/createEmployee")
     public ResponseEntity<Void> createEmployee(@Validated @RequestBody EmployeeRequest employeeRequest){

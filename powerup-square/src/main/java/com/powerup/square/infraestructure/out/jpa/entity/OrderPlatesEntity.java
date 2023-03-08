@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class OrderPlatesEntity {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Long id;

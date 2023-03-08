@@ -12,5 +12,5 @@ import java.util.Optional;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IOrderMapper {
     OrderEntity toEntity(Order order);
-    Order toOrder(Optional<OrderEntity> orderEntity);
+    Order toOrder(OrderEntity orderEntity);
 }
