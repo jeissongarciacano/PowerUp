@@ -1,5 +1,6 @@
 package com.powerup.square.application;
 
+import com.powerup.square.application.dto.ActivatePlateRequest;
 import com.powerup.square.application.dto.PlateRequest;
 import com.powerup.square.application.dto.PlateUpdatingRequest;
 import com.powerup.square.domain.model.Category;
@@ -60,4 +61,10 @@ public class SavePlateHandlerDataTest {
 
     }
 
+    public static ActivatePlateRequest obtainActivatePlateRequest() {
+        ActivatePlateRequest activatePlateRequest = new ActivatePlateRequest();
+        activatePlateRequest.setId(2L);
+        activatePlateRequest.setIdOwner(1L);
+        return activatePlateRequest;
+    }
 }

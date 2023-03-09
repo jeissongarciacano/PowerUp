@@ -1,5 +1,6 @@
 package com.powerup.square.application;
 
+import com.powerup.square.application.dto.ActivatePlateRequest;
 import com.powerup.square.application.dto.PlateRequest;
 import com.powerup.square.application.dto.PlateUpdatingRequest;
 import com.powerup.square.application.handler.impl.PlateHandler;
@@ -80,5 +81,14 @@ class PlateHandlerTest {
 
         verify(iPlateServicePort).updatePlate(plate);
 
+    }
+    @Test
+    void activatePlate(){
+        Plate plate = SavePlateHandlerDataTest.obtainPlate();
+        ActivatePlateRequest activatePlateRequest = SavePlateHandlerDataTest.obtainActivatePlateRequest();
+
+        when(iPlateServicePort.getPlate(anyLong())).thenReturn(plate);
+        plateHandler.activePlate(activatePlateRequest);
+        verify(iPlateServicePort).updatePlate(plate);
     }
 }

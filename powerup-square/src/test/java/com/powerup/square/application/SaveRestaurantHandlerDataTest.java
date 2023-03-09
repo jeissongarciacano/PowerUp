@@ -1,7 +1,11 @@
 package com.powerup.square.application;
 
+import com.powerup.square.application.dto.RestaurantListRequest;
 import com.powerup.square.application.dto.RestaurantRequest;
 import com.powerup.square.domain.model.Restaurant;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SaveRestaurantHandlerDataTest {
 
@@ -34,4 +38,16 @@ public class SaveRestaurantHandlerDataTest {
         return restaurantRequest;
     }
 
+    public static List<Restaurant> obtainRestaurants() {
+        List<Restaurant> restaurantList = new ArrayList<>();
+        return restaurantList;
+    }
+
+    public static RestaurantListRequest obtainRestaurantListRequest() {
+        RestaurantListRequest restaurantListRequest = new RestaurantListRequest();
+        restaurantListRequest.setAmount(2L);
+        restaurantListRequest.setPage(0L);
+        restaurantListRequest.setSort("name");
+        return restaurantListRequest;
+    }
 }

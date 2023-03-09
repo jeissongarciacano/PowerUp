@@ -1,5 +1,6 @@
 package com.powerup.square.application;
 
+import com.powerup.square.application.dto.RestaurantListRequest;
 import com.powerup.square.application.dto.RestaurantRequest;
 import com.powerup.square.application.handler.impl.RestaurantHandler;
 import com.powerup.square.application.mapper.IRestaurantRequestMapper;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -55,5 +58,13 @@ class RestaurantHandlerTest {
 
         verify(iRestaurantResponseMapper).toRestaurantResponse(restaurant);
 
+    }
+    @Test
+    void getRestaurants(){
+        List<Restaurant> restaurantList = SaveRestaurantHandlerDataTest.obtainRestaurants();
+        RestaurantListRequest restaurantListRequest = SaveRestaurantHandlerDataTest.obtainRestaurantListRequest();
+        when(iRestaurantServicePort.getAllRestaurant(restaurantListRequest)).thenReturn(restaurantList);
+        restaurantHandler.getRestaurants(restaurantListRequest);
+        verify(iRestaurantResponseMapper).toRestaurantResponse(restaurantList.get(0));
     }
 }
