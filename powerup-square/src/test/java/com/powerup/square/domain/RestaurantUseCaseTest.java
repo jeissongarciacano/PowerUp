@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
@@ -33,9 +35,8 @@ class RestaurantUseCaseTest {
 
     @Test
     void getAllRestaurant() {
-        //restaurantUseCase.getAllRestaurant();
-
-        //verify(iRestaurantPersistencePort).getAllRestaurant();
+        List<Restaurant> restaurants = restaurantUseCase.getAllRestaurant(SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest());
+        verify(iRestaurantPersistencePort).getAllRestaurant(SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest());
     }
 
 //    @Test

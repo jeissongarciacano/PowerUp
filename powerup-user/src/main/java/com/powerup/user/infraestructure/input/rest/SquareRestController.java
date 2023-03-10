@@ -82,7 +82,7 @@ public class SquareRestController {
     })
     @PostMapping("/client/getAllRestaurant")
     public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
-        return restaurantClient.getAllRestaurant(restaurantListRequest);
+        return ResponseEntity.status(HttpStatus.FOUND).body(restaurantClient.getAllRestaurant(restaurantListRequest));
     }
     @Operation(summary = "get Plates of Restaurant")
     @ApiResponses(value = {
@@ -92,8 +92,8 @@ public class SquareRestController {
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/client/getRestaurantPlates")
-    public ResponseEntity<List<RestaurantResponse>> getRestaurantPlates(@RequestBody PlateListRequest plateListRequest){
-        return restaurantClient.getRestaurantPlates(plateListRequest);
+    public ResponseEntity<List<PlateResponse>> getRestaurantPlates(@RequestBody PlateListRequest plateListRequest){
+        return  ResponseEntity.status(HttpStatus.FOUND).body(restaurantClient.getRestaurantPlates(plateListRequest));
     }
     @Operation(summary = "make Order")
     @ApiResponses(value = {
@@ -104,7 +104,9 @@ public class SquareRestController {
     })
     @PostMapping("/client/makeOrder")
     public ResponseEntity<Void> makeOrder(@Validated @RequestBody OrderRequest orderRequest){
-        return restaurantClient.makeOrder(orderRequest);
+        orderRequest.setIdClient(userRepository.findByEmail(userLoginApplication()).get().getId());
+        if(orderRequest.getIdPlates().size() == orderRequest.getAmountPlates().size()) return restaurantClient.makeOrder(orderRequest);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     @Operation(summary = "get All Order By State")
     @ApiResponses(value = {
@@ -113,9 +115,10 @@ public class SquareRestController {
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
-    @GetMapping("/employee/getAllOrderByState/{state}")
-    public ResponseEntity<List<OrderResponse>> getAllOrderByState(@PathVariable String state){
-        return restaurantClient.getAllOrderByState(state,userRepository.findByEmail(userLoginApplication()).get().getId());
+    @PostMapping("/employee/getAllOrderByState")
+    public ResponseEntity<List<OrderResponse>> getAllOrderByState(@Validated @RequestBody OrderListRequest orderListRequest){
+        orderListRequest.setIdEmployee(userRepository.findByEmail(userLoginApplication()).get().getId());
+        return ResponseEntity.status(HttpStatus.FOUND).body(restaurantClient.getAllOrderByState(orderListRequest));
     }
     @Operation(summary = "take Order")
     @ApiResponses(value = {

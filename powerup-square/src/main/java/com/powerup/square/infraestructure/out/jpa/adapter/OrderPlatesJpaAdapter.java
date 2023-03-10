@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -32,6 +33,6 @@ public class OrderPlatesJpaAdapter implements IOrderPlatesPersistencePort {
 
     @Override
     public List<OrderPlates> getAllOrderPlatesByOrderId(Long id) {
-        return null;
+        return orderPlatesRepository.findAllByOrder(id).stream().map(orderPlatesEntity -> orderPlatesMapper.toOrderPlates(orderPlatesEntity)).collect(Collectors.toList());
     }
 }

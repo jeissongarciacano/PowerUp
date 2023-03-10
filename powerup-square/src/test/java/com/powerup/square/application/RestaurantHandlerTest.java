@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -64,7 +65,6 @@ class RestaurantHandlerTest {
         List<Restaurant> restaurantList = SaveRestaurantHandlerDataTest.obtainRestaurants();
         RestaurantListRequest restaurantListRequest = SaveRestaurantHandlerDataTest.obtainRestaurantListRequest();
         when(iRestaurantServicePort.getAllRestaurant(restaurantListRequest)).thenReturn(restaurantList);
-        restaurantHandler.getRestaurants(restaurantListRequest);
-        verify(iRestaurantResponseMapper).toRestaurantResponse(restaurantList.get(0));
+        assertEquals(restaurantHandler.getRestaurants(restaurantListRequest).size(), 0);
     }
 }

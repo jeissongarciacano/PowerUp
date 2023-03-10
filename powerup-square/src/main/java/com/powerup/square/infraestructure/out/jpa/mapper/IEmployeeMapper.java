@@ -12,5 +12,5 @@ import java.util.Optional;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IEmployeeMapper {
     EmployeeEntity toEntity(Employee employee);
-    Employee toEmployee(Optional<EmployeeEntity> employeeEntity);
+    Employee toEmployee(EmployeeEntity employeeEntity);
 }

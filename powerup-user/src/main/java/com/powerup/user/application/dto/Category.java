@@ -5,10 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PlateUpdatingRequest {
+public class Category {
     private Long id;
+    private String name;
     private String description;
-    private Long price;
-    private Long idOwner;
 
 }

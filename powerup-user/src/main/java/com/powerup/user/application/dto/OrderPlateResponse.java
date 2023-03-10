@@ -5,10 +5,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PlateUpdatingRequest {
+public class OrderPlateResponse {
     private Long id;
+    private String name;
+    private Category category;
     private String description;
     private Long price;
-    private Long idOwner;
+    private String urlImage;
+    private Long amount;
 
 }

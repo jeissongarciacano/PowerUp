@@ -1,5 +1,6 @@
 package com.powerup.square.domain;
 
+import com.powerup.square.application.dto.RestaurantListRequest;
 import com.powerup.square.domain.model.Restaurant;
 
 public class SaveRestaurantUseCaseDataTest {
@@ -18,4 +19,11 @@ public class SaveRestaurantUseCaseDataTest {
         return restaurant;
     }
 
+    public static RestaurantListRequest obtainRestaurantListRequest() {
+        RestaurantListRequest restaurantListRequest = new RestaurantListRequest();
+        restaurantListRequest.setSort("name");
+        restaurantListRequest.setAmount(10L);
+        restaurantListRequest.setPage(0L);
+        return restaurantListRequest;
+    }
 }

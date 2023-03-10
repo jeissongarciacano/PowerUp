@@ -1,5 +1,6 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
+import com.powerup.square.application.dto.OrderListRequest;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.spi.IOrderPersistencePort;
 import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;
@@ -8,10 +9,13 @@ import com.powerup.square.infraestructure.out.jpa.repository.IEmployeeRepository
 import com.powerup.square.infraestructure.out.jpa.repository.IOrderRepository;
 import com.powerup.square.infraestructure.out.jpa.repository.IRestaurantRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -29,8 +33,12 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     }
 
     @Override
-    public List<Order> getAllOrder() {
-        return null;
+    public List<Order> getAllOrder(OrderListRequest orderListRequest) {
+        Pageable pageable = PageRequest.of(orderListRequest.getPage().intValue(),
+                orderListRequest.getAmount().intValue(),
+                Sort.by(orderListRequest.getSort()).descending());
+        return orderRepository.findAllByRestaurantAndState(orderListRequest.getIdEmployee(), orderListRequest.getState(), pageable)
+                .stream().map(orderMapper::toOrder).collect(Collectors.toList());
     }
 
     @Override
@@ -50,6 +58,11 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     @Override
     public Order getOrderByClientId(Long idClient) {
         return null;
+    }
+
+    @Override
+    public boolean existsByIdClientAndState(Long idClient, String state) {
+        return orderRepository.existsByIdClientAndState(idClient,state);
     }
 
 }

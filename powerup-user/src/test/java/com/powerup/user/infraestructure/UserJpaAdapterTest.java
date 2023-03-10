@@ -57,7 +57,7 @@ class UserJpaAdapterTest {
     @Test
     void existsByEmail() {
         //Given
-        String email = "angela@gmail.com";
+        String email = "test@gmail.com";
 
         //When
         userJpaAdapter.existsByEmail(email);

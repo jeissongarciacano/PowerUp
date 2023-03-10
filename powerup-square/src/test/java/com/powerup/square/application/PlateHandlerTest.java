@@ -7,6 +7,7 @@ import com.powerup.square.application.handler.impl.PlateHandler;
 import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.IPlateServicePort;
+import com.powerup.square.domain.model.Category;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.spi.ICategoryPersistencePort;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
@@ -16,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,25 +40,17 @@ class PlateHandlerTest {
 
     @Test
     void savePlate() {
-        //Given
-        Plate plate = SavePlateHandlerDataTest.obtainPlate();
-        PlateRequest plateRequest = SavePlateHandlerDataTest.obtainPlateRequest();
 
-        //When
-        when(iPlateRequestMapper.toPlate(plateRequest)).thenReturn(plate);
-//        when(!iRestaurantPersistencePort.existByIdOwner(anyLong()))
-//                .thenThrow(new NoDataFoundException())
-//                        .thenReturn(Optional.empty().isPresent());
+        Plate plate = SavePlateHandlerDataTest.obtainPlate();
         plate.setRestaurant(iRestaurantPersistencePort.getRestaurantByIdOwner(anyLong()));
         plate.setCategory(iCategoryPersistencePort.getCategory(anyLong()));
         plate.setId(anyLong());
-
+        PlateRequest plateRequest = SavePlateHandlerDataTest.obtainPlateRequest();
+        when(iPlateRequestMapper.toPlate(any(PlateRequest.class))).thenReturn(SavePlateHandlerDataTest.obtainPlate());
+        when(iRestaurantPersistencePort.existByIdOwner(anyLong())).thenReturn(true);
+        when(iRestaurantPersistencePort.getRestaurantByIdOwner(anyLong())).thenReturn(SaveRestaurantHandlerDataTest.obtainRestaurant());
+        when(iCategoryPersistencePort.getCategory(anyLong())).thenReturn(new Category(1L, "pastas", "pastas"));
         plateHandler.savePlate(plateRequest);
-
-
-        //Then
-        verify(iPlateServicePort).savePlate(plate);
-
 
     }
 

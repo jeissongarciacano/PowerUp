@@ -72,8 +72,8 @@ public class PlateRestController {
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/getPlates")
-    public ResponseEntity<List<PlateResponse>> getAllPlates(@RequestBody PlateListRequest plateListRequest){
-        return ResponseEntity.status(HttpStatus.FOUND).body(plateHandler.getPlates(plateListRequest));
+    public List<PlateResponse> getAllPlates(@RequestBody PlateListRequest plateListRequest){
+        return plateHandler.getPlates(plateListRequest);
     }
 
 }

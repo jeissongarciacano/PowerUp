@@ -3,6 +3,7 @@ package com.powerup.user.infraestructure.configuration.RestauranteClient;
 import com.powerup.user.application.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,13 +24,15 @@ public interface RestaurantClient {
     @RequestMapping(method = RequestMethod.PUT, value = "plates/activatePlate")
     public ResponseEntity<Void> activatePlate(@RequestBody ActivatePlateRequest activatePlateRequest);
     @RequestMapping(method = RequestMethod.POST, value = "restaurants/getAllRestaurant")
-    public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@RequestBody RestaurantListRequest restaurantListRequest);
+    public List<RestaurantResponse> getAllRestaurant(@RequestBody RestaurantListRequest restaurantListRequest);
     @RequestMapping(method = RequestMethod.POST, value = "plates/getPlates")
-    public ResponseEntity<List<RestaurantResponse>> getRestaurantPlates(@RequestBody PlateListRequest plateListRequest);
+    public List<PlateResponse> getRestaurantPlates(@RequestBody PlateListRequest plateListRequest);
     @RequestMapping(method = RequestMethod.POST, value = "order/makeOrder")
     public ResponseEntity<Void> makeOrder(@RequestBody OrderRequest orderRequest);
-    @RequestMapping(method = RequestMethod.POST, value = "order/getAllOrderByState")
-    public ResponseEntity<List<OrderResponse>> getAllOrderByState(@PathVariable String state, @PathVariable Long id);
+    @RequestMapping(method = RequestMethod.POST, value = "order/getOrdersByState")
+    public List<OrderResponse> getAllOrderByState(@RequestBody OrderListRequest orderListRequest);
+
+    //sin funcionamiento
     @RequestMapping(method = RequestMethod.PUT, value = "order/takeOrder")
     public ResponseEntity<Void> takeOrder(@PathVariable Long id, @PathVariable Long idEmployee);
     @RequestMapping(method = RequestMethod.PUT, value = "order/orderReadyDeliver")

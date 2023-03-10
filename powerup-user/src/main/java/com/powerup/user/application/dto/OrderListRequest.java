@@ -5,11 +5,14 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
-@Getter
 @Setter
-public class RestaurantListRequest {
+@Getter
+public class OrderListRequest {
     private Long amount;
     private Long page;
     @NotBlank
     private String sort;
+    private Long idEmployee;
+    @NotBlank
+    private String state;
 }

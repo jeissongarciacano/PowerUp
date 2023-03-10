@@ -1,5 +1,6 @@
 package com.powerup.square.application.mapper;
 
+import com.powerup.square.application.dto.OrderPlateResponse;
 import com.powerup.square.application.dto.PlateResponse;
 import com.powerup.square.domain.model.Category;
 import com.powerup.square.domain.model.Plate;
@@ -14,5 +15,6 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IPlateResponseMapper {
     PlateResponse toPlateResponse(Plate plate);
+    OrderPlateResponse toOrderPlateResponse(Plate plate);
 
 }

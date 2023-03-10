@@ -13,5 +13,5 @@ import java.util.Optional;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IOrderPlatesMapper {
     OrderPlatesEntity toEntity(OrderPlates orderPlates);
-    OrderPlates toOrderPlates(Optional<OrderPlatesEntity> orderPlatesEntity);
+    OrderPlates toOrderPlates(OrderPlatesEntity orderPlatesEntity);
 }

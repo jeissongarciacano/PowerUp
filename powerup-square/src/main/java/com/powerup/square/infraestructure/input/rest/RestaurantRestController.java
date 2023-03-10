@@ -40,8 +40,8 @@ public class RestaurantRestController {
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/getAllRestaurant")
-    public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
-        return ResponseEntity.status(HttpStatus.FOUND).body(restaurantHandler.getRestaurants(restaurantListRequest));
+    public List<RestaurantResponse> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
+        return restaurantHandler.getRestaurants(restaurantListRequest);
     }
 
 }

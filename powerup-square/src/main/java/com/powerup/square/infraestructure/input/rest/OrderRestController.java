@@ -2,7 +2,9 @@ package com.powerup.square.infraestructure.input.rest;
 
 
 import com.powerup.square.application.dto.EmployeeRequest;
+import com.powerup.square.application.dto.OrderListRequest;
 import com.powerup.square.application.dto.OrderRequest;
+import com.powerup.square.application.dto.OrderResponse;
 import com.powerup.square.application.handler.IOrderHandler;
 import com.powerup.square.domain.model.Order;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,8 +53,8 @@ public class OrderRestController {
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/getOrdersByState")
-    public ResponseEntity<List<Order>> getAllOrderByState(){
-        return ResponseEntity.status(HttpStatus.FOUND).body(orderHandler.getOrders());
+    public List<OrderResponse> getAllOrderByState(@Validated @RequestBody OrderListRequest orderListRequest){
+        return orderHandler.getOrders(orderListRequest);
     }
     @Operation(summary = "order ready to deliver")
     @ApiResponses(value = {

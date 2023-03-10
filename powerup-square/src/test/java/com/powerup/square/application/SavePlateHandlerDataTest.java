@@ -1,6 +1,7 @@
 package com.powerup.square.application;
 
 import com.powerup.square.application.dto.ActivatePlateRequest;
+import com.powerup.square.application.dto.OrderPlateResponse;
 import com.powerup.square.application.dto.PlateRequest;
 import com.powerup.square.application.dto.PlateUpdatingRequest;
 import com.powerup.square.domain.model.Category;
@@ -21,7 +22,7 @@ public class SavePlateHandlerDataTest {
                 "Have nachos, sour cream, guacamole and pico de gallo",
                 15L,
                 new Restaurant(
-                        100L,
+                        1L,
                         "Angus Hamburguers",
                         "Street 25",
                         1L,
@@ -66,5 +67,16 @@ public class SavePlateHandlerDataTest {
         activatePlateRequest.setId(2L);
         activatePlateRequest.setIdOwner(1L);
         return activatePlateRequest;
+    }
+
+    public static OrderPlateResponse obtainPlateResponse() {
+        OrderPlateResponse orderPlateResponse = new OrderPlateResponse();
+        orderPlateResponse.setAmount(1L);
+        orderPlateResponse.setCategory(new Category(1L,"pasta", "pastas"));
+        orderPlateResponse.setDescription("pastas");
+        orderPlateResponse.setName("pastas");
+        orderPlateResponse.setId(1L);
+        orderPlateResponse.setUrlImage("www.google.com");
+        return orderPlateResponse;
     }
 }

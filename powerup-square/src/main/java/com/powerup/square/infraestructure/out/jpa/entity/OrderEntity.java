@@ -1,5 +1,6 @@
 package com.powerup.square.infraestructure.out.jpa.entity;
 
+import com.powerup.square.domain.model.OrderPlates;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor
@@ -30,5 +33,4 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "id_restaurant", nullable = false)
     private RestaurantEntity restaurant;
-
 }
