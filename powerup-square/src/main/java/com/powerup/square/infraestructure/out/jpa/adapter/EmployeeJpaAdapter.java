@@ -19,12 +19,6 @@ public class EmployeeJpaAdapter implements IEmployeePersistencePort {
     public void saveEmployee(Employee employee) {
         employeeRepository.save(employeeMapper.toEntity(employee));
     }
-
-    @Override
-    public List<Employee> getAllEmployee() {
-        return null;
-    }
-
     @Override
     public Employee getEmployee(Long id) {
         return employeeMapper.toEmployee(employeeRepository.findByIdUser(id));

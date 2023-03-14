@@ -14,17 +14,10 @@ import java.util.List;
 public class RoleJpaAdapter implements IRolePersistencePort {
     private final IRoleRepository roleRepository;
     private final IRoleMapper roleMapper;
-
-    @Override
-    public List<Role> getAllRoles() {
-        return roleMapper.toRoles(roleRepository.findAll());
-    }
-
     @Override
     public Role getRoleById(Long id) {
         return roleMapper.toRole(roleRepository.findById(id).get());
     }
-
     @Override
     public Role getRoleByName(String name) {
         return roleMapper.toRole(roleRepository.findByName(name).get());

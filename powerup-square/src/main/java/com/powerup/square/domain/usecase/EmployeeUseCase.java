@@ -16,10 +16,6 @@ public class EmployeeUseCase implements IEmployeeServicePort {
         employeePersistencePort.saveEmployee(employee);
     }
     @Override
-    public List<Employee> getAllEmployee() {
-        return employeePersistencePort.getAllEmployee();
-    }
-    @Override
     public Employee getEmployee(Long id) {
         return employeePersistencePort.getEmployee(id);
     }

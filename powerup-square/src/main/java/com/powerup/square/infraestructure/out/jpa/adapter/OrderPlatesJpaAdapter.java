@@ -6,7 +6,6 @@ import com.powerup.square.infraestructure.out.jpa.entity.OrderPlatesEntity;
 import com.powerup.square.infraestructure.out.jpa.mapper.IOrderMapper;
 import com.powerup.square.infraestructure.out.jpa.mapper.IOrderPlatesMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IOrderPlatesRepository;
-import com.powerup.square.infraestructure.out.jpa.repository.IOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

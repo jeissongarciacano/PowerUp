@@ -21,7 +21,4 @@ public interface IUserResponseMapper {
             @Mapping(target="role", source="role")
     })
     UserResponse toUserResponse(User user);
-    List<UserResponse> toUserResponse(List<User> user);
-
-
 }

@@ -16,28 +16,21 @@ public class UserJpaAdapter implements IUserPersistencePort {
     private final IUserRepository userRepository;
     private final IUserMapper userMapper;
     @Override
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         UserEntity userEntity = userMapper.toEntity(user);
-        userRepository.save(userEntity);
+        return userMapper.toUser(userRepository.save(userEntity));
     }
     @Override
     public User getUser(Long id) {
         return userMapper.toUser(userRepository.findById(id).get());
     }
-
     @Override
     public User getUserByEmail(String email) {
         return userMapper.toUser(userRepository.findByEmail(email).get());
     }
-
     @Override
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
-    }
-
-    @Override
-    public List<User> findClientByRol(String roleName) {
-        return userMapper.toUser(userRepository.findClientByRoleId(roleName));
     }
     @Override
     public boolean existsByID(Long id) {

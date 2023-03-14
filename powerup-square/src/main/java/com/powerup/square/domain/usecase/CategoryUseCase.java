@@ -12,8 +12,8 @@ public class CategoryUseCase implements ICategoryServicePort {
         this.categoryPersistencePort = categoryPersistencePort;
     }
     @Override
-    public void saveCategory(Category category) {
-        categoryPersistencePort.saveCategory(category);
+    public Category saveCategory(Category category) {
+        return categoryPersistencePort.saveCategory(category);
     }
     @Override
     public List<Category> getAllCategory() {
@@ -26,6 +26,10 @@ public class CategoryUseCase implements ICategoryServicePort {
     @Override
     public boolean existByName(String name) {
         return categoryPersistencePort.existByName(name);
+    }
+    @Override
+    public boolean existById(Long id) {
+        return categoryPersistencePort.existById(id);
     }
 }
 

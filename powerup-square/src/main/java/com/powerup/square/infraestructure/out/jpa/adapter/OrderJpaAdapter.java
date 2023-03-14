@@ -1,6 +1,6 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.powerup.square.application.dto.OrderListRequest;
+import com.powerup.square.application.dto.order.OrderListRequest;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.spi.IOrderPersistencePort;
 import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;
@@ -33,11 +33,11 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     }
 
     @Override
-    public List<Order> getAllOrder(OrderListRequest orderListRequest) {
-        Pageable pageable = PageRequest.of(orderListRequest.getPage().intValue(),
-                orderListRequest.getAmount().intValue(),
-                Sort.by(orderListRequest.getSort()).descending());
-        return orderRepository.findAllByRestaurantAndState(orderListRequest.getIdEmployee(), orderListRequest.getState(), pageable)
+    public List<Order> getAllOrder(Long amount, Long page, String sort, Long idRestaurant, String state) {
+        Pageable pageable = PageRequest.of(page.intValue(),
+                amount.intValue(),
+                Sort.by(sort).descending());
+        return orderRepository.findAllByRestaurantAndState(idRestaurant, state, pageable)
                 .stream().map(orderMapper::toOrder).collect(Collectors.toList());
     }
 

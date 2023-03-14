@@ -1,7 +1,7 @@
 package com.powerup.square.application;
 
-import com.powerup.square.application.dto.RestaurantListRequest;
-import com.powerup.square.application.dto.RestaurantRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantListRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantRequest;
 import com.powerup.square.application.handler.impl.RestaurantHandler;
 import com.powerup.square.application.mapper.IRestaurantRequestMapper;
 import com.powerup.square.application.mapper.IRestaurantResponseMapper;
@@ -64,7 +64,7 @@ class RestaurantHandlerTest {
     void getRestaurants(){
         List<Restaurant> restaurantList = SaveRestaurantHandlerDataTest.obtainRestaurants();
         RestaurantListRequest restaurantListRequest = SaveRestaurantHandlerDataTest.obtainRestaurantListRequest();
-        when(iRestaurantServicePort.getAllRestaurant(restaurantListRequest)).thenReturn(restaurantList);
-        assertEquals(restaurantHandler.getRestaurants(restaurantListRequest).size(), 0);
+        when(iRestaurantServicePort.getAllRestaurant(restaurantListRequest.getAmount(), restaurantListRequest.getPage(), restaurantListRequest.getSort())).thenReturn(restaurantList);
+        assertEquals(restaurantHandler.getRestaurants(restaurantListRequest.getAmount(), restaurantListRequest.getPage(), restaurantListRequest.getSort()).size(), 0);
     }
 }

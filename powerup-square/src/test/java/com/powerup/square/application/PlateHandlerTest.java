@@ -1,8 +1,8 @@
 package com.powerup.square.application;
 
-import com.powerup.square.application.dto.ActivatePlateRequest;
-import com.powerup.square.application.dto.PlateRequest;
-import com.powerup.square.application.dto.PlateUpdatingRequest;
+import com.powerup.square.application.dto.plate.ActivatePlateRequest;
+import com.powerup.square.application.dto.plate.PlateRequest;
+import com.powerup.square.application.dto.plate.PlateUpdatingRequest;
 import com.powerup.square.application.handler.impl.PlateHandler;
 import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;

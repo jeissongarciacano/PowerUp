@@ -1,8 +1,8 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.RestaurantListRequest;
-import com.powerup.square.application.dto.RestaurantRequest;
-import com.powerup.square.application.dto.RestaurantResponse;
+import com.powerup.square.application.dto.restaurant.RestaurantListRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantResponse;
 import com.powerup.square.application.handler.IRestaurantHandler;
 import com.powerup.square.application.mapper.IRestaurantRequestMapper;
 import com.powerup.square.application.mapper.IRestaurantResponseMapper;
@@ -20,34 +20,42 @@ public class RestaurantHandler implements IRestaurantHandler {
     private final IRestaurantServicePort iRestaurantServicePort;
     private  final IRestaurantRequestMapper iRestaurantRequestMapper;
     private final IRestaurantResponseMapper iRestaurantResponseMapper;
-
-
     public RestaurantHandler(IRestaurantServicePort iRestaurantServicePort, IRestaurantRequestMapper iRestaurantRequestMapper, IRestaurantResponseMapper iRestaurantResponseMapper) {
         this.iRestaurantServicePort = iRestaurantServicePort;
         this.iRestaurantRequestMapper = iRestaurantRequestMapper;
         this.iRestaurantResponseMapper = iRestaurantResponseMapper;
     }
-
     @Override
-    public void saveRestaurant(RestaurantRequest restaurantRequest) {
-        Restaurant restaurant = iRestaurantRequestMapper.toRestaurant(restaurantRequest);
-        iRestaurantServicePort.saveRestaurant(restaurant);
+    public RestaurantResponse saveRestaurant(RestaurantRequest restaurantRequest) {
+        return iRestaurantResponseMapper.toRestaurantResponse(iRestaurantServicePort.saveRestaurant(iRestaurantRequestMapper.toRestaurant(restaurantRequest)));
     }
-
     @Override
     public RestaurantResponse getRestaurant(Long id) {
-        Restaurant restaurant = iRestaurantServicePort.getRestaurant(id);
-        return iRestaurantResponseMapper.toRestaurantResponse(restaurant);
+        return iRestaurantResponseMapper.toRestaurantResponse(iRestaurantServicePort.getRestaurant(id));
     }
-
     @Override
-    public List<RestaurantResponse> getRestaurants(RestaurantListRequest restaurantListRequest) {
-        List<Restaurant> restaurants = iRestaurantServicePort.getAllRestaurant(restaurantListRequest);
+    public List<RestaurantResponse> getRestaurants(Long amount, Long page, String sort) {
+        List<Restaurant> restaurants = iRestaurantServicePort.getAllRestaurant(amount, page, sort);
         List<RestaurantResponse> restaurantResponses = new ArrayList<>();
         for (int i = 0; i < restaurants.size(); i++) {
             restaurantResponses.add(iRestaurantResponseMapper.toRestaurantResponse(restaurants.get(i)));
         }
         return restaurantResponses;
     }
-
+    @Override
+    public Restaurant getRestaurantByIdOwner(Long idOwner) {
+        return iRestaurantServicePort.getRestaurantByIdOwner(idOwner);
+    }
+    @Override
+    public boolean existByName(String name) {
+        return iRestaurantServicePort.existByName(name);
+    }
+    @Override
+    public boolean existById(Long id) {
+        return iRestaurantServicePort.existById(id);
+    }
+    @Override
+    public boolean existByIdOwner(Long idOwner) {
+        return iRestaurantServicePort.existByIdOwner(idOwner);
+    }
 }

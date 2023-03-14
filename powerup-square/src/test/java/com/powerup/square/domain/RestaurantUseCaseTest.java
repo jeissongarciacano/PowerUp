@@ -35,8 +35,10 @@ class RestaurantUseCaseTest {
 
     @Test
     void getAllRestaurant() {
-        List<Restaurant> restaurants = restaurantUseCase.getAllRestaurant(SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest());
-        verify(iRestaurantPersistencePort).getAllRestaurant(SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest());
+        List<Restaurant> restaurants = restaurantUseCase.getAllRestaurant(SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getAmount(),
+                SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getPage(), SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getSort());
+        verify(iRestaurantPersistencePort).getAllRestaurant(SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getAmount(),
+                SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getPage(), SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getSort());
     }
 
 //    @Test

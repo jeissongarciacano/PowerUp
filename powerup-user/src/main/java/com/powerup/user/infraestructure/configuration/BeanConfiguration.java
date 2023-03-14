@@ -1,8 +1,10 @@
 package com.powerup.user.infraestructure.configuration;
 
+import com.powerup.user.domain.api.IRoleServicePort;
 import com.powerup.user.domain.api.IUserServicePort;
 import com.powerup.user.domain.spi.IRolePersistencePort;
 import com.powerup.user.domain.spi.IUserPersistencePort;
+import com.powerup.user.domain.usecase.RoleUseCase;
 import com.powerup.user.domain.usecase.UserUseCase;
 import com.powerup.user.infraestructure.configuration.security.aut.DetailsUser;
 import com.powerup.user.infraestructure.configuration.security.aut.IUserDetailsMapper;
@@ -46,8 +48,12 @@ public class BeanConfiguration {
         return new RoleJpaAdapter(roleRepository,roleMapper);
     }
     @Bean
+    public IRoleServicePort roleServicePort(){
+        return new RoleUseCase(rolePersistencePort());
+    }
+    @Bean
     public IUserServicePort userServicePort(){
-        return new UserUseCase(userPersistencePort(), rolePersistencePort());
+        return new UserUseCase(userPersistencePort(), roleServicePort());
     }
     @Bean
     public PasswordEncoder encoder() {

@@ -14,25 +14,24 @@ import java.util.List;
 public class CategoryJpaAdapter implements ICategoryPersistencePort {
     private final ICategoryRepository categoryRepository;
     private final ICategoryMapper categoryMapper;
-
-
     @Override
-    public void saveCategory(Category category) {
-
+    public Category saveCategory(Category category) {
+        return categoryMapper.toCategory(categoryRepository.save(categoryMapper.toEntity(category)));
     }
-
     @Override
     public List<Category> getAllCategory() {
         return null;
     }
-
     @Override
     public Category getCategory(Long id) {
         return categoryMapper.toCategory(categoryRepository.findById(id).get());
     }
-
     @Override
     public boolean existByName(String name) {
-        return false;
+        return categoryRepository.existsByName(name);
+    }
+    @Override
+    public boolean existById(Long id) {
+        return categoryRepository.existsById(id);
     }
 }

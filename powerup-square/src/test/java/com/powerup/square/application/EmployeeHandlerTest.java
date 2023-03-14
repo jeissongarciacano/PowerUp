@@ -1,6 +1,6 @@
 package com.powerup.square.application;
 
-import com.powerup.square.application.dto.EmployeeRequest;
+import com.powerup.square.application.dto.user.EmployeeRequest;
 import com.powerup.square.application.handler.impl.EmployeeHandler;
 import com.powerup.square.domain.api.IEmployeeServicePort;
 import com.powerup.square.domain.model.Employee;

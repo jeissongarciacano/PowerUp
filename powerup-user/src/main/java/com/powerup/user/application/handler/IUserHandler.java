@@ -6,8 +6,8 @@ import com.powerup.user.application.dto.UserResponse;
 import java.util.List;
 
 public interface IUserHandler {
-    void saveUser(UserRequest userRequest, Long idRol);
+    UserResponse saveUser(UserRequest userRequest, Long idRol);
     UserResponse getUser(Long id);
     UserResponse getUserByEmail(String email);
-    List<UserResponse> findClientByRol(String roleName);
+    UserResponse getUserById(Long id);
 }

@@ -1,10 +1,8 @@
 package com.powerup.user.infraestructure.input.rest;
 
-import com.powerup.user.application.dto.EmployeeRequest;
 import com.powerup.user.application.dto.UserRequest;
 import com.powerup.user.application.dto.UserResponse;
 import com.powerup.user.application.handler.IUserHandler;
-import com.powerup.user.infraestructure.configuration.RestauranteClient.RestaurantClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 public class UserRestController {
     private final IUserHandler userHandler;
-    private final RestaurantClient restaurantClient;
     @Operation(summary = "Add a new Owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
@@ -31,10 +28,9 @@ public class UserRestController {
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
-    @PostMapping("/admin/createOwner")
-    public ResponseEntity<Void> saveUserEntityOwner(@Validated @RequestBody UserRequest userRequest){
-        userHandler.saveUser(userRequest, 1L);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @PostMapping("/admin/create_owner")
+    public ResponseEntity<UserResponse> saveUserEntityOwner(@Validated @RequestBody UserRequest userRequest){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userHandler.saveUser(userRequest, 1L));
     }
     @Operation(summary = "Add a new Employee")
     @ApiResponses(value = {
@@ -43,16 +39,9 @@ public class UserRestController {
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
-    @PostMapping("/owner/createEmployee")
-    public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
-        userHandler.saveUser(userRequest, 2L);
-        UserResponse userResponse = userHandler.getUserByEmail(userRequest.getEmail());
-        EmployeeRequest employeeRequest = new EmployeeRequest();
-        employeeRequest.setIdUser(userResponse.getId());
-        employeeRequest.setIdOwner(userHandler.getUserByEmail(userLoginApplication()).getId());
-        employeeRequest.setField("Employee");
-        restaurantClient.createEmployee(employeeRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @PostMapping("/owner/create_employee")
+    public ResponseEntity<UserResponse> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userHandler.saveUser(userRequest, 2L));
 
     }
     @Operation(summary = "Add a new Client")
@@ -62,9 +51,8 @@ public class UserRestController {
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/client")
-    public ResponseEntity<Void> saveUserEntityClient(@Validated @RequestBody UserRequest userRequest){
-        userHandler.saveUser(userRequest, 3L);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<UserResponse> saveUserEntityClient(@Validated @RequestBody UserRequest userRequest){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userHandler.saveUser(userRequest, 3L));
     }
 
     @Operation(summary = "get user by id")
@@ -75,11 +63,9 @@ public class UserRestController {
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
 
     })
-    @GetMapping("/GET/UserById/{id}")
+    @GetMapping("/id/{id}")
     public UserResponse getUserById(@PathVariable Long id){
-        System.out.println(id);
-        UserResponse userResponse = userHandler.getUser(id);
-        return userResponse;
+        return userHandler.getUser(id);
     }
 
     @Operation(summary = "get User by email")
@@ -89,13 +75,12 @@ public class UserRestController {
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
-    @GetMapping("/GET/UserByEmail/{email}")
+    @GetMapping("/email/{email}")
     public UserResponse getUserByEmail(@PathVariable String email){
-        System.out.println(email);
-        UserResponse userResponse = userHandler.getUserByEmail(email);
-        return userResponse;
+        return userHandler.getUserByEmail(email);
     }
 
+    //obtener cosas del jwt
     public static String userLoginApplication() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = null;

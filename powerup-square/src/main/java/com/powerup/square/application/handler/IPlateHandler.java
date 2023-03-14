@@ -1,13 +1,17 @@
 package com.powerup.square.application.handler;
 
-import com.powerup.square.application.dto.*;
+import com.powerup.square.application.dto.plate.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 public interface IPlateHandler {
-    void savePlate(PlateRequest plateRequest);
+    PlateResponse savePlate(PlateRequest plateRequest);
     PlateResponse getPlate(Long id);
-    void updatePlate(PlateUpdatingRequest plateUpdatingRequest);
-    void activePlate(ActivatePlateRequest activatePlateRequest);
-    List<PlateResponse> getPlates(PlateListRequest plateListRequest);
+    PlateResponse updatePlate(PlateUpdatingRequest plateUpdatingRequest);
+    PlateResponse activePlate(ActivatePlateRequest activatePlateRequest);
+    List<PlateResponse> getPlates(Long amount, Long page, String sort, Long idRestaurant);
+    void deletePlate(Long id);
+    boolean existById(Long id);
+    boolean existByName(String name);
 }

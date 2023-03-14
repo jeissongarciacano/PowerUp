@@ -1,14 +1,13 @@
 package com.powerup.square.domain.api;
 
-import com.powerup.square.application.dto.OrderListRequest;
+import com.powerup.square.application.dto.order.OrderListRequest;
 import com.powerup.square.domain.model.Order;
 
 import java.util.List;
 
 public interface IOrderServicePort {
-
     Order saveOrder(Order order);
-    List<Order> getAllOrder(OrderListRequest orderListRequest);
+    List<Order> getAllOrder(Long amount, Long page, String sort, Long idRestaurant, String state);
     Order getOrder(Long id);
     void cancelOrder(Long id);
     void updateOrder(Order order);

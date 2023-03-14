@@ -1,7 +1,7 @@
 package com.powerup.square.application;
 
-import com.powerup.square.application.dto.OrderListRequest;
-import com.powerup.square.application.dto.OrderRequest;
+import com.powerup.square.application.dto.order.OrderListRequest;
+import com.powerup.square.application.dto.order.OrderRequest;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.model.OrderPlates;
 

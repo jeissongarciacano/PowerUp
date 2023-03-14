@@ -1,50 +1,42 @@
 package com.powerup.user.domain.usecase;
 
+import com.powerup.user.domain.api.IRoleServicePort;
 import com.powerup.user.domain.api.IUserServicePort;
 import com.powerup.user.domain.exception.NoDataFoundException;
 import com.powerup.user.domain.exception.UserAlreadyExistsException;
 import com.powerup.user.domain.model.User;
-import com.powerup.user.domain.spi.IRolePersistencePort;
 import com.powerup.user.domain.spi.IUserPersistencePort;
-
-import java.util.List;
 
 public class UserUseCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
-    private final IRolePersistencePort rolePersistencePort;
-    public UserUseCase(IUserPersistencePort userPersistencePort, IRolePersistencePort rolePersistencePort) {
+    private final IRoleServicePort roleServicePort;
+    public UserUseCase(IUserPersistencePort userPersistencePort, IRoleServicePort roleServicePort) {
         this.userPersistencePort = userPersistencePort;
-        this.rolePersistencePort = rolePersistencePort;
+        this.roleServicePort = roleServicePort;
     }
     @Override
-    public void saveUser(User user, Long idRol) {
-        if(existByEmail(user.getEmail())) throw new UserAlreadyExistsException();
-        user.setRole(rolePersistencePort.getRoleById(idRol));
+    public User saveUser(User user, Long idRol) {
+        if(existsByEmail(user.getEmail())) throw new UserAlreadyExistsException();
+        user.setRole(roleServicePort.getRoleById(idRol));
         user.setId(-1L);
-        userPersistencePort.saveUser(user);
+        return userPersistencePort.saveUser(user);
     }
     @Override
     public User getUser(Long id) {
-        if(!existByID(id)) throw new NoDataFoundException();
+        if(!existsByID(id)) throw new NoDataFoundException();
         return userPersistencePort.getUser(id);
     }
-
     @Override
     public User getUserByEmail(String email) {
+        if(!existsByEmail(email)) throw new NoDataFoundException();
         return userPersistencePort.getUserByEmail(email);
     }
-
     @Override
-    public boolean existByEmail(String email) {
+    public boolean existsByEmail(String email) {
         return userPersistencePort.existsByEmail(email);
     }
-
     @Override
-    public List<User> findClientByIdRole(String roleName) {
-        return userPersistencePort.findClientByRol(roleName);
-    }
-    @Override
-    public boolean existByID(Long id) {
+    public boolean existsByID(Long id) {
         return userPersistencePort.existsByID(id);
     }
 }

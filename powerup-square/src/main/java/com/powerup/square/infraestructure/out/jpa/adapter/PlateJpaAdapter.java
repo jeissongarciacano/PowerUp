@@ -1,8 +1,7 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.powerup.square.application.dto.PlateListRequest;
+import com.powerup.square.application.dto.plate.PlateListRequest;
 import com.powerup.square.domain.model.Plate;
-import com.powerup.square.infraestructure.out.jpa.entity.PlateEntity;
 import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.infraestructure.out.jpa.mapper.IPlateMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IPlateRepository;
@@ -21,17 +20,16 @@ public class PlateJpaAdapter implements IPlatePersistencePort{
     private final IPlateMapper plateMapper;
 
     @Override
-    public void savePlate(Plate plate){
-        PlateEntity plateEntity = plateMapper.toEntity(plate);
-        plateRepository.save(plateEntity);
+    public Plate savePlate(Plate plate){
+        return plateMapper.toPlate(plateRepository.save(plateMapper.toEntity(plate)));
     }
 
     @Override
-    public List<Plate> getAllPlates(PlateListRequest plateListRequest) {
-        Pageable pagination = PageRequest.of(plateListRequest.getPage().intValue(),
-                plateListRequest.getAmount().intValue(),
-                Sort.by(plateListRequest.getSort()).descending());
-        return plateRepository.findByIdRestaurant( plateListRequest.getIdRestaurant(), pagination).stream()
+    public List<Plate> getAllPlates(Long amount, Long page, String sort, Long idRestaurant) {
+        Pageable pagination = PageRequest.of(page.intValue(),
+                amount.intValue(),
+                Sort.by(sort).descending());
+        return plateRepository.findByIdRestaurant(idRestaurant, pagination).stream()
                 .map(plateEntity -> plateMapper.toPlate(plateEntity)).collect(Collectors.toList());
     }
 
@@ -41,8 +39,8 @@ public class PlateJpaAdapter implements IPlatePersistencePort{
     }
 
     @Override
-    public void updatePlate(Plate plate) {
-        plateRepository.save(plateMapper.toEntity(plate));
+    public Plate updatePlate(Plate plate) {
+        return plateMapper.toPlate(plateRepository.save(plateMapper.toEntity(plate)));
     }
 
     @Override

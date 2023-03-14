@@ -11,8 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional
 public class UserHandler implements IUserHandler {
@@ -27,12 +25,11 @@ public class UserHandler implements IUserHandler {
         this.iUserResponseMapper = iUserResponseMapper;
         this.passwordEncoder = passwordEncoder;
     }
-
     @Override
-    public void saveUser(UserRequest userRequest, Long idRol) {
+    public UserResponse saveUser(UserRequest userRequest, Long idRol) {
         User user = iUserRequestMapper.toUser(userRequest);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        iUserServicePort.saveUser(user, idRol);
+        return iUserResponseMapper.toUserResponse(iUserServicePort.saveUser(user, idRol));
     }
 
     @Override
@@ -40,15 +37,13 @@ public class UserHandler implements IUserHandler {
         User user = iUserServicePort.getUser(id);
         return iUserResponseMapper.toUserResponse(user);
     }
-
     @Override
     public UserResponse getUserByEmail(String email) {
         return iUserResponseMapper.toUserResponse(iUserServicePort.getUserByEmail(email));
     }
 
     @Override
-    public List<UserResponse> findClientByRol(String roleName) {
-        return iUserResponseMapper.toUserResponse(iUserServicePort.findClientByIdRole(roleName));
+    public UserResponse getUserById(Long id) {
+        return iUserResponseMapper.toUserResponse(iUserServicePort.getUser(id));
     }
-
 }

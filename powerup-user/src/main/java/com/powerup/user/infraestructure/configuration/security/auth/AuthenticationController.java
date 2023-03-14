@@ -1,5 +1,6 @@
 package com.powerup.user.infraestructure.configuration.security.auth;
 
+import com.powerup.user.infraestructure.configuration.security.auth.AuthenticationService;
 import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationRequest;
 import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
