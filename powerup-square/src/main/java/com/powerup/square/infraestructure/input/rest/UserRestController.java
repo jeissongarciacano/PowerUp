@@ -6,6 +6,7 @@ import com.powerup.square.application.dto.user.UserResponse;
 import com.powerup.square.application.dto.user.security.AuthenticationRequest;
 import com.powerup.square.application.dto.user.security.AuthenticationResponse;
 import com.powerup.square.application.handler.impl.EmployeeHandler;
+import com.powerup.square.infraestructure.configuration.TwilioClient;
 import com.powerup.square.infraestructure.configuration.userclient.UserClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserRestController {
     private final UserClient userClient;
     private final EmployeeHandler employeeHandler;
+
     @Operation(summary = "Login")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User logged", content = @Content),
@@ -33,6 +35,7 @@ public class UserRestController {
     })
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+
         return ResponseEntity.status(HttpStatus.OK).body(userClient.authenticate(request).getBody());
     }
     @Operation(summary = "Add a new Owner")
