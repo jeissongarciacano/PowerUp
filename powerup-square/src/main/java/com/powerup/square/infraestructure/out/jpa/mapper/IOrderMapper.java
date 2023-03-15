@@ -19,7 +19,7 @@ public interface IOrderMapper {
             @Mapping(target="idClient", source="idClient"),
             @Mapping(target="date", source="date"),
             @Mapping(target="state", source="state"),
-            @Mapping(target="idChef", source="chef.id"),
+            @Mapping(target="chef", source="chef"),
             @Mapping(target="idRestaurant", source="restaurant.id")
     })
     Order toOrder(OrderEntity orderEntity);

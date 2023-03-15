@@ -41,7 +41,7 @@ public class RestaurantRestController {
     })
     @GetMapping("/client/get_restaurant/{amount}/{page}/{sort}")
     public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@PathVariable Long amount, @PathVariable Long page,@PathVariable String sort){
-        if(amount <= 0L || page <= 0 || sort.isEmpty() || sort.isBlank()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(restaurantHandler.getRestaurants(amount, page, sort));
+        if(amount <= 0L || page < 0 || sort.isEmpty() || sort.isBlank()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.status(HttpStatus.FOUND).body(restaurantHandler.getRestaurants(amount, page, sort));
     }
 }

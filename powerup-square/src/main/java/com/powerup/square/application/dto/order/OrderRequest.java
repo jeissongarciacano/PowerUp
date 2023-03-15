@@ -8,8 +8,7 @@ import java.util.List;
 @Getter
 public class OrderRequest {
     private Long idClient;
-    private List<Long> idPlates;
-    private List<Long> amountPlates;
+    private List<PlateOrderRequest> plateOrderRequests;
     private Long idRestaurant;
 
 }

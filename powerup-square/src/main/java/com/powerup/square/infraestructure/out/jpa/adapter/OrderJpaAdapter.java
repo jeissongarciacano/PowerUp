@@ -43,7 +43,7 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
 
     @Override
     public Order getOrder(Long id) {
-        return null;
+        return orderMapper.toOrder(orderRepository.findById(id).get());
     }
 
     @Override
@@ -63,6 +63,20 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     @Override
     public boolean existsByIdClientAndState(Long idClient, String state) {
         return orderRepository.existsByIdClientAndState(idClient,state);
+    }
+
+    @Override
+    public boolean existsByIdAndState(Long id, String state) {
+        return orderRepository.existsByIdAndState(id, state);
+    }
+
+    @Override
+    public List<Order> getAllOrderByIdEmployee(Long idEmployee, Long amount, Long page, String sort, String state) {
+        Pageable pageable = PageRequest.of(page.intValue(),
+                amount.intValue(),
+                Sort.by(sort).descending());
+        return orderRepository.findAllByChefAndState(idEmployee, state, pageable)
+                .stream().map(orderMapper::toOrder).collect(Collectors.toList());
     }
 
 }

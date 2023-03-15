@@ -52,7 +52,7 @@ public class PlateHandler implements IPlateHandler {
     @Override
     public PlateResponse updatePlate(PlateUpdatingRequest plateUpdatingRequest) {
         if(!restaurantHandler.existByIdOwner(plateUpdatingRequest.getIdOwner()) ||
-                !Objects.equals(plateUpdatingRequest.getIdOwner(), restaurantHandler.getRestaurantByIdOwner(plateUpdatingRequest.getIdOwner()).getIdOwner()))
+                !Objects.equals(plateUpdatingRequest.getIdOwner(), iPlateServicePort.getPlate(plateUpdatingRequest.getId()).getRestaurant().getIdOwner()))
             throw new NoDataFoundException();
         else{
             Plate plate = iPlateServicePort.getPlate(plateUpdatingRequest.getId());
@@ -64,7 +64,7 @@ public class PlateHandler implements IPlateHandler {
     @Override
     public PlateResponse activePlate(ActivatePlateRequest activatePlateRequest){
         if (!restaurantHandler.existByIdOwner(activatePlateRequest.getIdOwner()) ||
-                !Objects.equals(activatePlateRequest.getIdOwner(), restaurantHandler.getRestaurantByIdOwner(activatePlateRequest.getIdOwner()).getIdOwner()))
+                !Objects.equals(activatePlateRequest.getIdOwner(), iPlateServicePort.getPlate(activatePlateRequest.getId()).getRestaurant().getIdOwner()))
             throw new NoDataFoundException();
         else{
             Plate plate = iPlateServicePort.getPlate(activatePlateRequest.getId());

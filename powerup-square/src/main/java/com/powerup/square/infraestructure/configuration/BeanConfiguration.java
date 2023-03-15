@@ -122,4 +122,8 @@ public class BeanConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+    @Bean
+    public TwilioClient twilioClient(){
+        return new TwilioClient();
+    }
 }

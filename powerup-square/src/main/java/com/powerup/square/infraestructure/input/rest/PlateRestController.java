@@ -71,7 +71,7 @@ public class PlateRestController {
     })
     @GetMapping("/client/get_plates/{amount}/{page}/{sort}/{idRestaurant}")
     public ResponseEntity<List<PlateResponse>> getAllPlates(@PathVariable Long amount, @PathVariable Long page,@PathVariable String sort, @PathVariable Long idRestaurant){
-        if(amount <= 0L || page <= 0L || sort.isBlank() || sort.isEmpty() || idRestaurant <= 0L) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        if(amount <= 0L || page < 0L || sort.isBlank() || sort.isEmpty() || idRestaurant <= 0L) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         return ResponseEntity.status(HttpStatus.FOUND).body(plateHandler.getPlates(amount, page, sort, idRestaurant));
     }
     public static String userLoginApplication() {

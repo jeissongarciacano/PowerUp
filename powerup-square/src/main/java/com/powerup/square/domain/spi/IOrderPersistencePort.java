@@ -13,4 +13,6 @@ public interface IOrderPersistencePort {
     void updateOrder(Order order);
     Order getOrderByClientId(Long idClient);
     boolean existsByIdClientAndState(Long idClient, String state);
+    boolean existsByIdAndState(Long id, String state);
+    List<Order> getAllOrderByIdEmployee(Long idEmployee,Long amount, Long page, String sort, String state);
 }

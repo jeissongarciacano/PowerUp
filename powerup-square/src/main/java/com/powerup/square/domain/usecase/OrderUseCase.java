@@ -41,5 +41,14 @@ public class OrderUseCase implements IOrderServicePort {
     public boolean existsByIdClientAndState(Long idClient, String state) {
         return orderPersistencePort.existsByIdClientAndState(idClient, state);
     }
+    @Override
+    public boolean existsByIdAndState(Long id, String state) {
+        return orderPersistencePort.existsByIdAndState(id, state);
+    }
+
+    @Override
+    public List<Order> getAllOrderByIdEmployee(Long idEmployee, Long amount, Long page, String sort, String state) {
+        return orderPersistencePort.getAllOrderByIdEmployee(idEmployee, amount, page, sort, state);
+    }
 }
 
