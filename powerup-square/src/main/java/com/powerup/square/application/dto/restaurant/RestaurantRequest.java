@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 @Setter
 public class RestaurantRequest {
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z\\s]*$", message = "The field name shouldn't have numbers")
+    @Pattern(regexp = "^[a-zA-Z]+", message = "The field name shouldn't have numbers")
     private String name;
     @NotBlank (message = "The field address is mandatory")
     private String address;

@@ -61,28 +61,16 @@ class UserUseCaseTest {
         String email = "jeisson@gmail.com";
 
         //When
-        userUseCase.existByEmail(email);
+        userUseCase.existsByEmail(email);
 
         //Then
         verify(userPersistencePort).existsByEmail(email);
     }
 
     @Test
-    void findClientByIdRole() {
-        //Given
-        String roleName = "ROLE_PROPRIETARY";
-
-        //When
-        userUseCase.findClientByIdRole(roleName);
-
-        //Then
-        verify(userPersistencePort).findClientByRol(roleName);
-    }
-
-    @Test
     void existByID() {
         //When
-        userUseCase.existByID(anyLong());
+        userUseCase.existsByID(anyLong());
 
         //Then
         verify(userPersistencePort).existsByID(anyLong());

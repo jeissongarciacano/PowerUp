@@ -1,7 +1,10 @@
 package com.powerup.square.infraestructure.input.rest;
 
 
-import com.powerup.square.application.dto.plate.*;
+import com.powerup.square.application.dto.plate.ActivatePlateRequest;
+import com.powerup.square.application.dto.plate.PlateRequest;
+import com.powerup.square.application.dto.plate.PlateResponse;
+import com.powerup.square.application.dto.plate.PlateUpdatingRequest;
 import com.powerup.square.application.handler.IPlateHandler;
 import com.powerup.square.infraestructure.configuration.userclient.UserClient;
 import io.swagger.v3.oas.annotations.Operation;

@@ -7,12 +7,12 @@ public class SaveUserUseCaseDataTest {
 
     public static User obtainUser(){
 
-        User user = new User(
+        return new User(
                 2L,
-                "Luis",
-                "Cardoso",
-                "3013212310",
-                "luis@gmail.com",
+                "User",
+                "1",
+                "3013542310",
+                "User1@gmail.com",
                 "12345",
                 new Role(
                         2L,
@@ -21,8 +21,6 @@ public class SaveUserUseCaseDataTest {
                 ),
                 "1025841144"
         );
-
-        return user;
     }
 
 

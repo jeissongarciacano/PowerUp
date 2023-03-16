@@ -1,6 +1,5 @@
 package com.powerup.square.domain.api;
 
-import com.powerup.square.application.dto.order.OrderListRequest;
 import com.powerup.square.domain.model.Order;
 
 import java.util.List;

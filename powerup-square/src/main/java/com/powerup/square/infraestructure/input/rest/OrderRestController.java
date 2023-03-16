@@ -1,7 +1,6 @@
 package com.powerup.square.infraestructure.input.rest;
 
 
-import com.powerup.square.application.dto.order.OrderListRequest;
 import com.powerup.square.application.dto.order.OrderRequest;
 import com.powerup.square.application.dto.order.OrderResponse;
 import com.powerup.square.application.handler.IOrderHandler;

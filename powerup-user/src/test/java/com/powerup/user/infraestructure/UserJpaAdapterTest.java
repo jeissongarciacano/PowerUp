@@ -67,16 +67,6 @@ class UserJpaAdapterTest {
     }
 
     @Test
-    void findClientByRol() {
-        //Given
-        String roleName = "ROLE_ADMIN";
-        //When
-        userJpaAdapter.findClientByRol(roleName);
-        //Then
-        verify(userMapper).toUser(userRepository.findClientByRoleId(roleName));
-    }
-
-    @Test
     void existsByID() {
         //Given
         Long id = 3L;

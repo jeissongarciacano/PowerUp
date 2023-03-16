@@ -10,8 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,15 +76,5 @@ public class UserRestController {
     @GetMapping("/email/{email}")
     public UserResponse getUserByEmail(@PathVariable String email){
         return userHandler.getUserByEmail(email);
-    }
-
-    //obtener cosas del jwt
-    public static String userLoginApplication() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = null;
-        if (principal instanceof UserDetails) {
-            userDetails = (UserDetails) principal;
-        }
-        return userDetails.getUsername();
     }
 }

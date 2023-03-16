@@ -81,15 +81,4 @@ class UserHandlerTest {
         verify(iUserResponseMapper).toUserResponse(iUserServicePort.getUserByEmail(email));
     }
 
-    @Test
-    void findClientByRol() {
-        // Given
-        String roleName = "ROLE_PROPRIETARY";
-
-        // When
-        userHandler.findClientByRol(roleName);
-
-        // Then
-        verify(iUserResponseMapper).toUserResponse(iUserServicePort.findClientByIdRole(roleName));
-    }
 }

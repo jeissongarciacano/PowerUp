@@ -1,11 +1,9 @@
 package com.powerup.user.infraestructure.configuration.security.auth;
 
-import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationRequest;
-import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationResponse;
-import com.powerup.user.infraestructure.configuration.security.auth.dto.UserAuthDto;
+import com.powerup.user.application.dto.security.AuthenticationRequest;
+import com.powerup.user.application.dto.security.AuthenticationResponse;
+import com.powerup.user.application.dto.security.UserAuthDto;
 import com.powerup.user.infraestructure.configuration.security.JwtService;
-import com.powerup.user.infraestructure.configuration.security.aut.DetailsUser;
-import com.powerup.user.infraestructure.configuration.security.aut.IUserDetailsMapper;
 import com.powerup.user.infraestructure.out.jpa.entity.UserEntity;
 import com.powerup.user.infraestructure.out.jpa.repository.IRoleRepository;
 import com.powerup.user.infraestructure.out.jpa.repository.IUserRepository;

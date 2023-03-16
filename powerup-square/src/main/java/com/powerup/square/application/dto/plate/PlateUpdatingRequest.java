@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class PlateUpdatingRequest {
     private Long id;
-    @NotBlank
     private String description;
     private Long price;
     private Long idOwner;

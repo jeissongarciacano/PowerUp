@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -16,6 +17,7 @@ public class PlateRequest {
     private Long idCategory;
     @NotBlank
     private String description;
+    @Min(0L)
     private Long price;
     private Long idOwner;
     @NotBlank

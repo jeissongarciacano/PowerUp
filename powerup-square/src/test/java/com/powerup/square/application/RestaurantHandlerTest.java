@@ -1,6 +1,5 @@
 package com.powerup.square.application;
 
-import com.powerup.square.application.dto.restaurant.RestaurantListRequest;
 import com.powerup.square.application.dto.restaurant.RestaurantRequest;
 import com.powerup.square.application.handler.impl.RestaurantHandler;
 import com.powerup.square.application.mapper.IRestaurantRequestMapper;
@@ -17,6 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -63,8 +63,7 @@ class RestaurantHandlerTest {
     @Test
     void getRestaurants(){
         List<Restaurant> restaurantList = SaveRestaurantHandlerDataTest.obtainRestaurants();
-        RestaurantListRequest restaurantListRequest = SaveRestaurantHandlerDataTest.obtainRestaurantListRequest();
-        when(iRestaurantServicePort.getAllRestaurant(restaurantListRequest.getAmount(), restaurantListRequest.getPage(), restaurantListRequest.getSort())).thenReturn(restaurantList);
-        assertEquals(restaurantHandler.getRestaurants(restaurantListRequest.getAmount(), restaurantListRequest.getPage(), restaurantListRequest.getSort()).size(), 0);
+        when(iRestaurantServicePort.getAllRestaurant(anyLong(),anyLong(), anyString())).thenReturn(restaurantList);
+        assertEquals(restaurantHandler.getRestaurants(anyLong(), anyLong(), anyString()),restaurantList );
     }
 }

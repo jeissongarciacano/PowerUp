@@ -10,10 +10,10 @@ public class SaveHandlerDataTest {
     public static User obtainUser(){
         User user = new User(
                 2L,
-                "David",
-                "Cardoso",
+                "User",
+                "1",
                 "3013542310",
-                "alejandro@gmail.com",
+                "User1@gmail.com",
                 "12345",
                 new Role(
                         2L,
@@ -29,11 +29,11 @@ public class SaveHandlerDataTest {
     public static UserRequest obtainUserRequest(){
         UserRequest userRequest = new UserRequest();
 
-        userRequest.setName("David");
-        userRequest.setLastName("Tolosa");
+        userRequest.setName("user");
+        userRequest.setLastName("1");
         userRequest.setIdDocument("1025841144");
         userRequest.setPhone("3013542310");
-        userRequest.setEmail("alejandro@gmail.com");
+        userRequest.setEmail("user1@gmail.com");
         userRequest.setPassword("12345");
 
         return userRequest;
@@ -42,10 +42,10 @@ public class SaveHandlerDataTest {
     public static UserResponse obtainUserResponse(){
         UserResponse userResponse = new UserResponse();
 
-        userResponse.setName("David");
-        userResponse.setLastName("Tolosa");
+        userResponse.setName("user");
+        userResponse.setLastName("1");
         userResponse.setPhone("3013542310");
-        userResponse.setEmail("alejandro@gmail.com");
+        userResponse.setEmail("user1@gmail.com");
         userResponse.setRole(new Role(2L, "ROLE_PROPRIETARY", "Proprietary"));
 
         return userResponse;

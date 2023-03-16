@@ -6,7 +6,6 @@ import com.powerup.square.application.dto.user.UserResponse;
 import com.powerup.square.application.dto.user.security.AuthenticationRequest;
 import com.powerup.square.application.dto.user.security.AuthenticationResponse;
 import com.powerup.square.application.handler.impl.EmployeeHandler;
-import com.powerup.square.infraestructure.configuration.TwilioClient;
 import com.powerup.square.infraestructure.configuration.userclient.UserClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -1,4 +1,4 @@
-package com.powerup.user.infraestructure.configuration.security.aut;
+package com.powerup.user.infraestructure.configuration.security.auth;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

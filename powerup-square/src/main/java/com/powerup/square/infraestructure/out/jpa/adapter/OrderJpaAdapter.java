@@ -1,6 +1,5 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.powerup.square.application.dto.order.OrderListRequest;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.spi.IOrderPersistencePort;
 import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;

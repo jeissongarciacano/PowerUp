@@ -1,6 +1,5 @@
 package com.powerup.square.domain.usecase;
 
-import com.powerup.square.application.dto.plate.PlateListRequest;
 import com.powerup.square.domain.api.IPlateServicePort;
 import com.powerup.square.domain.exception.NoDataFoundException;
 import com.powerup.square.domain.exception.PlateAlreadyExistsException;

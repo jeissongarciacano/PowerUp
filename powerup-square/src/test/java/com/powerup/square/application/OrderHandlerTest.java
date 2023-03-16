@@ -1,8 +1,8 @@
 package com.powerup.square.application;
 
-import com.powerup.square.application.dto.order.OrderListRequest;
 import com.powerup.square.application.dto.order.OrderRequest;
 import com.powerup.square.application.handler.impl.OrderHandler;
+import com.powerup.square.application.handler.impl.RestaurantHandler;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.IEmployeeServicePort;
 import com.powerup.square.domain.api.IOrderPlatesServicePort;
@@ -13,6 +13,8 @@ import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.spi.IOrderPersistencePort;
 import com.powerup.square.domain.spi.IOrderPlatesPersistencePort;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
+import com.powerup.square.infraestructure.configuration.TwilioClient;
+import com.powerup.square.infraestructure.configuration.userclient.UserClient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,13 +48,17 @@ public class OrderHandlerTest {
     IEmployeeServicePort employeeServicePort;
     @Mock
     IPlateResponseMapper plateResponseMapper;
+    @Mock
+    RestaurantHandler restaurantHandler;
+    @Mock
+    UserClient userClient;
 
     @Test
     void saveOrder(){
         Order order = SaveOrderHandlerDataTest.obtainOrder();
         OrderRequest orderRequest = SaveOrderHandlerDataTest.obtainOrderRequest();
 
-        when(iRestaurantPersistencePort.existById(orderRequest.getIdRestaurant())).thenReturn(true);
+        when(restaurantHandler.existById(orderRequest.getIdRestaurant())).thenReturn(true);
         when(orderHandler.existsByIdClientAndState(orderRequest.getIdClient(), "PENDIENTE")).thenReturn(false);
         when(orderHandler.existsByIdClientAndState(orderRequest.getIdClient(), "EN_PREPARACION")).thenReturn(false);
         when(orderHandler.existsByIdClientAndState(orderRequest.getIdClient(), "LISTO")).thenReturn(false);
@@ -63,12 +69,48 @@ public class OrderHandlerTest {
     }
     @Test
     void getOrders(){
-//        OrderListRequest orderListRequest = SaveOrderHandlerDataTest.obtainOrderListRequest();
-//        when(employeeServicePort.getEmployee(anyLong())).thenReturn(SaveEmployeeHandlerDataTest.obtainEmployee());
-//        when(orderServicePort.getAllOrder(any(OrderListRequest.class))).thenReturn(SaveOrderHandlerDataTest.obtainOrderList());
-//        when(orderHandler.getOrderPlatesById(anyLong())).thenReturn(SaveOrderHandlerDataTest.obtainOrderPlateList());
-//        when(plateResponseMapper.toOrderPlateResponse(any(Plate.class))).thenReturn(SavePlateHandlerDataTest.obtainPlateResponse());
-//        assertEquals(orderHandler.getOrders(orderListRequest).get(anyInt()).getId(), 1L);
+        when(employeeServicePort.getEmployee(anyLong())).thenReturn(SaveEmployeeHandlerDataTest.obtainEmployee());
+        when(orderServicePort.getAllOrder(anyLong(), anyLong(), anyString(), anyLong(), anyString())).thenReturn(SaveOrderHandlerDataTest.obtainOrderList());
+        when(orderHandler.getOrderPlatesById(anyLong())).thenReturn(SaveOrderHandlerDataTest.obtainOrderPlateList());
+        when(plateResponseMapper.toOrderPlateResponse(any(Plate.class))).thenReturn(SavePlateHandlerDataTest.obtainPlateResponse());
+        assertEquals(orderHandler.getOrders(anyLong(), anyLong(), anyString(), anyLong(), anyString()).get(anyInt()).getId(), 1L);
+    }
+    @Test
+    void takeOrder(){
+        when(employeeServicePort.getEmployee(anyLong())).thenReturn(SaveEmployeeHandlerDataTest.obtainEmployee());
+        when(orderHandler.existsByIdAndState(anyLong(), anyString())).thenReturn(true);
+        when(orderServicePort.getOrder(anyLong())).thenReturn(SaveOrderHandlerDataTest.obtainOrder());
+        when(employeeServicePort.getEmployee(anyLong())).thenReturn(SaveEmployeeHandlerDataTest.obtainEmployee());
+        when(orderServicePort.getAllOrderByIdEmployee(anyLong(), anyLong(), anyLong(), anyString(), anyString())).thenReturn(SaveOrderHandlerDataTest.obtainOrderList());
+        when(orderHandler.getOrderPlatesById(anyLong())).thenReturn(SaveOrderHandlerDataTest.obtainOrderPlateList());
+        when(plateResponseMapper.toOrderPlateResponse(any(Plate.class))).thenReturn(SavePlateHandlerDataTest.obtainPlateResponse());
+
+        assertEquals(orderHandler.takeOrder(anyLong(), anyLong(), anyLong(), anyLong(), anyString(), anyString()).get(anyInt()).getId(), 1L);
+    }
+    @Test
+    void orderReady(){
+        when(orderHandler.existsByIdAndState(anyLong(), anyString())).thenReturn(true);
+        Order order = SaveOrderHandlerDataTest.obtainOrder();
+        order.setChef(SaveEmployeeHandlerDataTest.obtainEmployee());
+        when(orderServicePort.getOrder(anyLong())).thenReturn(order);
+        when(userClient.getUserById(anyLong())).thenReturn(SaveOrderHandlerDataTest.obtainUser());
+        orderHandler.readyToDeliver(anyLong(), 10L);
+    }
+    @Test
+    void orderDeliver(){
+        when(orderHandler.existsByIdAndState(anyLong(), anyString())).thenReturn(true);
+        Order order = SaveOrderHandlerDataTest.obtainOrder();
+        order.setChef(SaveEmployeeHandlerDataTest.obtainEmployee());
+        when(orderServicePort.getOrder(anyLong())).thenReturn(order);
+        when(userClient.getUserById(anyLong())).thenReturn(SaveOrderHandlerDataTest.obtainUser());
+        orderHandler.deliver(anyLong(), 10L, "100100100");
+    }
+    @Test
+    void cancelOrder(){
+        when(orderHandler.existsByIdAndState(anyLong(), anyString())).thenReturn(true);
+        when(orderHandler.existsByIdAndState(anyLong(), anyString())).thenReturn(false);
+        when(orderServicePort.getOrder(anyLong())).thenReturn(SaveOrderHandlerDataTest.obtainOrder());
+        orderHandler.cancelOrder(anyLong(), 2L);
     }
 
 }

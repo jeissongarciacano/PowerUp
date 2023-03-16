@@ -3,6 +3,7 @@ package com.powerup.square.application;
 import com.powerup.square.application.dto.plate.ActivatePlateRequest;
 import com.powerup.square.application.dto.plate.PlateRequest;
 import com.powerup.square.application.dto.plate.PlateUpdatingRequest;
+import com.powerup.square.application.handler.IRestaurantHandler;
 import com.powerup.square.application.handler.impl.PlateHandler;
 import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
@@ -66,11 +67,11 @@ class PlateHandlerTest {
 
     @Test
     void updatePlate() {
-        //falla por validacion  de propietario
         Plate plate = SavePlateHandlerDataTest.obtainPlate();
         PlateUpdatingRequest plateUpdatingRequest = SavePlateHandlerDataTest.obtainPlateUpdatingRequest();
 
         when(iPlateServicePort.getPlate(anyLong())).thenReturn(plate);
+        when(iPlateServicePort.getPlate(plateUpdatingRequest.getId()).getRestaurant().getIdOwner()).thenReturn(1L);
         plateHandler.updatePlate(plateUpdatingRequest);
 
         verify(iPlateServicePort).updatePlate(plate);

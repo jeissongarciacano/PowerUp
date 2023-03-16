@@ -11,8 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
@@ -35,26 +34,9 @@ class RestaurantUseCaseTest {
 
     @Test
     void getAllRestaurant() {
-        List<Restaurant> restaurants = restaurantUseCase.getAllRestaurant(SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getAmount(),
-                SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getPage(), SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getSort());
-        verify(iRestaurantPersistencePort).getAllRestaurant(SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getAmount(),
-                SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getPage(), SaveRestaurantUseCaseDataTest.obtainRestaurantListRequest().getSort());
+        List<Restaurant> restaurants = restaurantUseCase.getAllRestaurant(anyLong(), anyLong(), anyString());
+        verify(iRestaurantPersistencePort).getAllRestaurant(anyLong(), anyLong(), anyString());
     }
-
-//    @Test
-//    void getRestaurant() {
-//        restaurantUseCase.getRestaurant(anyLong());
-//
-//        verify(iRestaurantPersistencePort).getRestaurant(anyLong());
-//    }
-
-//    @Test
-//    void getRestaurantByIdOwner() {
-//        restaurantUseCase.getRestaurantByIdOwner(1L);
-//
-//        verify(iRestaurantPersistencePort).getRestaurant(1L);
-//    }
-
     @Test
     void existByName() {
         restaurantUseCase.existByName(any());

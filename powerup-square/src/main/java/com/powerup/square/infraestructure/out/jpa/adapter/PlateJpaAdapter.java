@@ -1,6 +1,5 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.powerup.square.application.dto.plate.PlateListRequest;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.infraestructure.out.jpa.mapper.IPlateMapper;

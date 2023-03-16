@@ -1,6 +1,5 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.powerup.square.application.dto.restaurant.RestaurantListRequest;
 import com.powerup.square.domain.model.Restaurant;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
 import com.powerup.square.infraestructure.out.jpa.mapper.IRestaurantMapper;

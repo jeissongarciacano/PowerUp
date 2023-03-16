@@ -1,6 +1,6 @@
-package com.powerup.user.infraestructure.configuration.security.aut;
+package com.powerup.user.infraestructure.configuration.security.auth;
 
-import com.powerup.user.infraestructure.configuration.security.auth.dto.UserAuthDto;
+import com.powerup.user.application.dto.security.UserAuthDto;
 import com.powerup.user.infraestructure.out.jpa.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
